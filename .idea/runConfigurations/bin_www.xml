@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="bin/www" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="$PROJECT_DIR$/bin/www_recommender_iestudy" working-dir="$PROJECT_DIR$">
+    <envs>
+      <env name="DEBUG" value="ejsServer1:*" />
+    </envs>
+    <browser start="true" with-js-debugger="true" url="http://localhost:5015/intersectionexplorer" />
+    <method />
+  </configuration>
+</component>

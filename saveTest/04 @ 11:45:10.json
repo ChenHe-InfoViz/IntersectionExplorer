@@ -1,0 +1,195 @@
+[
+  {
+    "type": 0,
+    "usedSets": [
+      {
+        "name": "top-10 agent (10)",
+        "type": 0
+      },
+      {
+        "name": "tag-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bookmark-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bibliography agent (10)",
+        "type": 0
+      },
+      {
+        "name": "ext. bookmarks agent (10)",
+        "type": 0
+      },
+      {
+        "name": "P Brusilovsky (18/18)",
+        "type": 1
+      }
+    ],
+    "time": "04 @ 11:44:58"
+  },
+  {
+    "type": 1,
+    "set": [
+      {
+        "name": "N Stupak (9/22)",
+        "type": 1
+      }
+    ],
+    "check": true,
+    "usedSets": [
+      {
+        "name": "top-10 agent (10)",
+        "type": 0
+      },
+      {
+        "name": "tag-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bookmark-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bibliography agent (10)",
+        "type": 0
+      },
+      {
+        "name": "ext. bookmarks agent (10)",
+        "type": 0
+      },
+      {
+        "name": "P Brusilovsky (18/18)",
+        "type": 1
+      },
+      {
+        "name": "N Stupak (9/22)",
+        "type": 1
+      }
+    ],
+    "time": "04 @ 11:45:03"
+  },
+  {
+    "type": 1,
+    "set": [
+      {
+        "name": "R Araújo (8/9)",
+        "type": 1
+      }
+    ],
+    "check": true,
+    "usedSets": [
+      {
+        "name": "top-10 agent (10)",
+        "type": 0
+      },
+      {
+        "name": "tag-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bookmark-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bibliography agent (10)",
+        "type": 0
+      },
+      {
+        "name": "ext. bookmarks agent (10)",
+        "type": 0
+      },
+      {
+        "name": "P Brusilovsky (18/18)",
+        "type": 1
+      },
+      {
+        "name": "N Stupak (9/22)",
+        "type": 1
+      },
+      {
+        "name": "R Araújo (8/9)",
+        "type": 1
+      }
+    ],
+    "time": "04 @ 11:45:04"
+  },
+  {
+    "type": 4,
+    "setsCombination": [
+      [
+        {
+          "name": "R Araújo (8/9)",
+          "type": 1,
+          "state": 1
+        },
+        {
+          "name": "ext. bookmarks agent (10)",
+          "type": 0,
+          "state": 1
+        },
+        {
+          "name": "bibliography agent (10)",
+          "type": 0,
+          "state": 1
+        },
+        {
+          "name": "bookmark-based agent (10)",
+          "type": 0,
+          "state": 1
+        }
+      ]
+    ],
+    "group_type": "NONQUERY_GROUP",
+    "query_header": "normal",
+    "Items": [
+      "10761"
+    ],
+    "time": "04 @ 11:45:05"
+  },
+  {
+    "type": 2,
+    "sort": [
+      {
+        "name": "sort by overlapping sizes Descending",
+        "type": 7
+      }
+    ],
+    "time": "04 @ 11:45:07"
+  },
+  {
+    "type": 4,
+    "setsCombination": [
+      [
+        {
+          "name": "ext. bookmarks agent (10)",
+          "type": 0,
+          "state": 1
+        },
+        {
+          "name": "bibliography agent (10)",
+          "type": 0,
+          "state": 1
+        },
+        {
+          "name": "bookmark-based agent (10)",
+          "type": 0,
+          "state": 1
+        },
+        {
+          "name": "tag-based agent (10)",
+          "type": 0,
+          "state": 1
+        }
+      ]
+    ],
+    "group_type": "NONQUERY_GROUP",
+    "query_header": "normal",
+    "Items": [
+      "10805",
+      "10789"
+    ],
+    "time": "04 @ 11:45:10"
+  }
+]

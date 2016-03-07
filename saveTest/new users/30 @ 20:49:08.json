@@ -1,0 +1,121 @@
+[
+  {
+    "userID": "16",
+    "name": "Peter Brusilovsky",
+    "email": "peterb@pitt.edu",
+    "time": "30 @ 14:48:17"
+  },
+  {
+    "type": 1,
+    "set": [
+      {
+        "name": "Katrien Verbert (12)",
+        "type": 1
+      }
+    ],
+    "check": false,
+    "usedSets": [
+      {
+        "name": "tag-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "content-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "Peter Brusilovsky (31)",
+        "type": 1
+      }
+    ],
+    "time": "30 @ 14:48:19"
+  },
+  {
+    "type": 1,
+    "set": [
+      {
+        "name": "Katrien Verbert (12)",
+        "type": 1
+      }
+    ],
+    "check": true,
+    "usedSets": [
+      {
+        "name": "tag-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "content-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "Peter Brusilovsky (31)",
+        "type": 1
+      },
+      {
+        "name": "Katrien Verbert (12)",
+        "type": 1
+      }
+    ],
+    "time": "30 @ 14:48:41"
+  },
+  {
+    "type": 3,
+    "setsCombination": [
+      {
+        "name": "Katrien Verbert (12)",
+        "type": 1,
+        "state": 1
+      },
+      {
+        "name": "tag-based agent (10)",
+        "type": 0,
+        "state": 1
+      }
+    ],
+    "itemNumber": 1,
+    "group_type": "NONQUERY_GROUP",
+    "time": "30 @ 14:48:47"
+  },
+  {
+    "type": 3,
+    "setsCombination": [
+      {
+        "name": "content-based agent (10)",
+        "type": 0,
+        "state": 1
+      },
+      {
+        "name": "tag-based agent (10)",
+        "type": 0,
+        "state": 1
+      }
+    ],
+    "itemNumber": 1,
+    "group_type": "NONQUERY_GROUP",
+    "time": "30 @ 14:48:53"
+  },
+  {
+    "type": 3,
+    "setsCombination": [
+      {
+        "name": "Katrien Verbert (12)",
+        "type": 1,
+        "state": 1
+      },
+      {
+        "name": "content-based agent (10)",
+        "type": 0,
+        "state": 1
+      },
+      {
+        "name": "tag-based agent (10)",
+        "type": 0,
+        "state": 1
+      }
+    ],
+    "itemNumber": 1,
+    "group_type": "NONQUERY_GROUP",
+    "time": "30 @ 14:48:59"
+  }
+]

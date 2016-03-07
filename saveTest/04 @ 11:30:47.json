@@ -1,0 +1,78 @@
+[
+  {
+    "type": 0,
+    "usedSets": [
+      {
+        "name": "top-10 agent (10)",
+        "type": 0
+      },
+      {
+        "name": "tag-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bookmark-based agent (10)",
+        "type": 0
+      },
+      {
+        "name": "bibliography agent (10)",
+        "type": 0
+      },
+      {
+        "name": "ext. bookmarks agent (10)",
+        "type": 0
+      },
+      {
+        "name": "P Brusilovsky (18/18)",
+        "type": 1
+      }
+    ],
+    "time": "04 @ 11:30:36"
+  },
+  {
+    "type": 4,
+    "setsCombination": [
+      [
+        {
+          "name": "bibliography agent (10)",
+          "type": 0,
+          "state": 1
+        },
+        {
+          "name": "bookmark-based agent (10)",
+          "type": 0,
+          "state": 1
+        }
+      ]
+    ],
+    "group_type": "NONQUERY_GROUP",
+    "query_header": "normal",
+    "Items": [
+      "10776"
+    ],
+    "time": "04 @ 11:30:43"
+  },
+  {
+    "type": 4,
+    "setsCombination": [
+      [
+        {
+          "name": "ext. bookmarks agent (10)",
+          "type": 0,
+          "state": 1
+        },
+        {
+          "name": "tag-based agent (10)",
+          "type": 0,
+          "state": 1
+        }
+      ]
+    ],
+    "group_type": "NONQUERY_GROUP",
+    "query_header": "normal",
+    "Items": [
+      "10756"
+    ],
+    "time": "04 @ 11:30:45"
+  }
+]
