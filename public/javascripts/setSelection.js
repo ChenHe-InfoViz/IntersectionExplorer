@@ -13,7 +13,7 @@ function plotSetOverview() {
         initialize = arguments[0].initialize || false;
 
         if (initialize){
-            ctx.setSelection.mode = "none"
+            ctx.setSelection.mode = "none";
             ctx.setSelection.modeChange = false;
             ctx.setSelection.multiSelIn = d3.set();
             ctx.setSelection.multiSelOut = d3.set();
@@ -50,16 +50,12 @@ function plotSetOverview() {
     //    return usedSets.indexOf(n) == -1
     //});
 
-
-
     // --- INIT the SVG structure (d3 version)
-
-
     var setSelectionGroup = headerSVG.selectAll(".setSelection").data([1]);
     setSelectionGroup.enter().append("g").attr({
         class: "setSelection",
         "transform": "translate(0,"  + (ctx.textHeight + ctx.guildHeaderHeight) + ")"
-    })
+    });
 
 
     // scale for the size of the subSets, also used for the sets
@@ -80,7 +76,7 @@ function plotSetOverview() {
             .selectAll('.setLabel')
             .data(usedSets, function (d) {
                 return d.elementName;
-            })
+            });
         usedSetsLabels.exit().remove();
         var usedSetsLabelsEnter = usedSetsLabels.enter().append("g").attr("class", "setLabel").attr({
             transform: function (d, i) {
@@ -96,7 +92,7 @@ function plotSetOverview() {
                 height: (textHeight + 1),
                 width: cellSize,//setRowScale.rangeBand()
                 transform: "translate(0, 5)"
-            }).append("svg:title")
+            }).append("svg:title");
         // background bar
         var usedSetsRect = usedSetsLabelsEnter
             .append('rect')
@@ -105,7 +101,7 @@ function plotSetOverview() {
                 x: 1,
                 width: cellSize - 2,//setRowScale.rangeBand()
                 transform: "translate(0, 5)"
-            })
+            });
             //  .attr("transform", "skewX(45)")
 
         usedSetsRect.each(function(d,i) {
@@ -131,7 +127,7 @@ function plotSetOverview() {
                 //else {
                 //    d3.select(this).style("fill", "#636363");
                 //}
-            }).append("svg:title")
+            }).append("svg:title");
 
 
 
@@ -214,7 +210,7 @@ function plotSetOverview() {
                    }
                    document.getElementById("tipbar").innerHTML = "Click to view all papers " + text + ".";
                    mouseoverColumn(d,i);})
-               .on('mouseout', mouseoutColumn)
+               .on('mouseout', mouseoutColumn);
 
         // *** update sizes (might happen when changing datasets)
         d3.selectAll(".usedSets .setSize").transition().duration(500).each(function(d){
@@ -222,7 +218,7 @@ function plotSetOverview() {
             d3.select(this).attr({
                 y: textHeight - (setSizeScale(d.setSize)),
                 height: setSizeScale(d.setSize)
-            })
+            });
             d3.selectAll(".setSizeRect").selectAll('title').text(function (d, i) {
                 var names = setIdToSet[d.id].elementName.split(/\(|\)|\//g);
                 //console.log(names)
@@ -233,7 +229,7 @@ function plotSetOverview() {
                         case 1:
                             //console.log(d.id);
                             if(d.id == globalSetId) return names[2].trim() + " papers bookmarked by you.";
-                            var string = ""
+                            var string = "";
                             if(parseInt(names[2].trim()) > 1) {
                                 string = names[2].trim() + " papers bookmarked by " + names[0].trim();
                                 switch(names[1].trim()){
@@ -260,7 +256,7 @@ function plotSetOverview() {
                     }
             }).style({
                 'font-size': '16pt'
-            });;
+            });
         });
 
 
@@ -270,11 +266,11 @@ function plotSetOverview() {
                 y: textHeight - (setSizeScale(names[1])),
                 height: setSizeScale(names[1])
             })
-        })
+        });
 
         usedSetsLabelsEnter.transition().duration(400).delay(400).attr({
             opacity: 1
-        })
+        });
         // *** update group position
 //        usedSetsLabels
 //            .attr({
@@ -297,7 +293,7 @@ function plotSetOverview() {
                 }
 
             }
-        })
+        });
 
         //usedSetsLabels.selectAll(".setSizeRect")
         //    .attr({
@@ -313,8 +309,6 @@ function plotSetOverview() {
         //
         //
         //    })
-
-
     }
 
     updateUsedSets();
@@ -334,7 +328,7 @@ function plotSetOverview() {
             //add tooltips
             d3.select("#checkBoxes").on('mouseover', function(){
                 document.getElementById("tipbar").innerHTML = "Select an interesting agent, user or tag to explore its related papers in the view";
-            })
+            });
 
             while (divEle.firstChild) {
                 divEle.removeChild(divEle.firstChild);
@@ -515,15 +509,15 @@ function plotSetOverview() {
             sets.filter(function(d){
                 return ctx.setSelection.multiSelIn.has(d.elementName) ||
                     ctx.setSelection.multiSelOut.has(d.elementName)
-            })
+            });
 
 
         ctx.setSelection.multiSelIn = d3.set();
         ctx.setSelection.multiSelOut = d3.set();
 
         //close multiselect panel
-        ctx.setSelection.mode ="none"
-        ctx.setSelection.modeChange= true
+        ctx.setSelection.mode ="none";
+        ctx.setSelection.modeChange= true;
 
         if (list_update.length>0){
             // updateSetCon will call plot again

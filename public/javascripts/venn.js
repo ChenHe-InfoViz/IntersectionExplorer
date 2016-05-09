@@ -48,7 +48,7 @@ VennDiagram.prototype.plot = function( highlightSubsets, setCount ) {
 	else {
 	//	console.error( "Venn diagram is only implemented for 2 or 3 sets." );
 	}
-}
+};
 
 VennDiagram.prototype.plot2Set = function( highlightSubsets ) {
 	var self = this;
@@ -64,7 +64,7 @@ VennDiagram.prototype.plot2Set = function( highlightSubsets ) {
 
 	var vis = svg.append("svg:g")
 	    .attr("width", width)
-	    .attr("height", height)
+	    .attr("height", height);
 	    //.attr( "transform", "scale(0.5)");
 
 	vis.append("svg:rect")
@@ -108,7 +108,7 @@ VennDiagram.prototype.plot2Set = function( highlightSubsets ) {
 	    .attr("width", width)
 	    .attr("height", height)
 	    .attr("class", function() { return ( self.isActive( [1,1], highlightSubsets ) ? "venn-two-set-area-active" : "venn-two-set-area" ); } );
-}
+};
 
 
 VennDiagram.prototype.plot3Set = function( highlightSubsets ) {
@@ -125,7 +125,7 @@ VennDiagram.prototype.plot3Set = function( highlightSubsets ) {
 
 	var vis = svg.append("svg:g")
 	    .attr("width", width)
-	    .attr("height", height)
+	    .attr("height", height);
 	    //.attr( "transform", "scale(0.5)");
 
 	vis.append("svg:rect")
@@ -207,4 +207,4 @@ VennDiagram.prototype.plot3Set = function( highlightSubsets ) {
 	    .attr("width", width)
 	    .attr("height", height)
 	    .attr("class", function() { return ( self.isActive( [1,1,1], highlightSubsets ) ? "venn-three-set-area-active" : "venn-three-set-area" ); } );
-}
+};

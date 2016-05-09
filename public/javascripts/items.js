@@ -174,18 +174,43 @@ function plotSelectedItems( elementId, selection ) {
                             //    return "http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=137&presentationID=" + attributes[1].values[selection.items[i]]; //create url from data
                             //})
                             .on("click", function(){
-                                d3.select(this).style("color", "#4b2f89");
-                                var $dialog = $('<div></div>')
-                                    .html('<iframe style="border: 0px;" src="'+ "http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=139&presentationID=" + attributes[1].values[selection.items[i]] + '" width="100%" height="100%"></iframe>')
-                                    .dialog({
-                                        autoOpen: false,
-                                        modal: true,
-                                        height: 1200,
-                                        width: 1200,
-                                        title: attributes[2].values[selection.items[i]]
-                                    });
-                                $dialog.dialog('open');
+                                //d3.select(this).style("color", "#4b2f89");
 
+                                //put the get detail in server because of https
+                                //$.ajax({
+                                //    type: "POST",
+                                //    url: "detail",
+                                //    data: JSON.stringify({id: attributes[1].values[selection.items[i]]}),
+                                //    dataType: "json",
+                                //    contentType: 'application/json',
+                                //    success: function (response) {
+                                //        try {
+                                //            //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+                                //            //contentRecXml = $.parseXML(recXml);
+                                //            bibliJSON = response;
+                                //        }
+                                //        catch (e) {
+                                //            console.log("bibli error");
+                                //        }
+                                //        success()
+                                //    },
+                                //    error: function () {
+                                //        console.log("get bibli failed.");
+                                //        bibliRequestLoop();
+                                //    },
+                                //    timeout: 5000
+                                //}).complete(bibliDefer.resolve);
+                                //var $dialog = $('<div></div>')
+                                //    .html('<iframe style="border: 0px;" src="'+ "http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=139&presentationID=" + attributes[1].values[selection.items[i]] + '" width="100%" height="100%"></iframe>')
+                                //    .dialog({
+                                //        autoOpen: false,
+                                //        modal: true,
+                                //        height: 1200,
+                                //        width: 1200,
+                                //        title: attributes[2].values[selection.items[i]]
+                                //    });
+                                //$dialog.dialog('open');
+                                window.open("http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=139&presentationID=" + attributes[1].values[selection.items[i]], '_blank');
                                 var date = new Date();
                               userBehavior.push({type: 5, item: attributes[0].values[selection.items[i]],time: (date.getDate()<10?'0':'') + date.getDate()  + " @ " + (date.getHours()<10?'0':'') + date.getHours()  + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes()  + ":" + (date.getSeconds()<10?'0':'') + date.getSeconds()});
                                 $(EventManager).trigger("user-behavior-added");
@@ -209,7 +234,10 @@ function plotSelectedItems( elementId, selection ) {
                                     d3.select(this).on('click', null);
                                     $.ajax({
                                         type: "POST",
-                                        url: "http://halley.exp.sis.pitt.edu/cn3/include/put2.php?method=schedulePresentation&userID=" + globalUserId + "&contentID=" + attributes[0].values[selection.items[i]],
+                                        data: JSON.stringify({userId: globalUserId, id: attributes[0].values[selection.items[i]]}),
+                                        dataType: "json",
+                                        contentType: 'application/json',
+                                        url: "bookmark",
                                         success: function (recXml) {
                                             document.getElementById("tipbar").innerHTML = "You bookmarked \"" + attributes[2].values[selection.items[i]] + "\" successfully! The set view has been updated as well. ";
                                             a.text("Bookmarked.")
@@ -225,6 +253,7 @@ function plotSelectedItems( elementId, selection ) {
                                                 time: (date.getDate()<10?'0':'') + date.getDate()  + " @ " + (date.getHours()<10?'0':'') + date.getHours()  + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes()  + ":" + (date.getSeconds()<10?'0':'') + date.getSeconds()
                                             });
                                             $(EventManager).trigger("user-behavior-added");
+                                            console.log(selection.items[i]);
                                             $(EventManager).trigger("refresh", [selection.items[i]]);
                                         },
                                         error: function () {

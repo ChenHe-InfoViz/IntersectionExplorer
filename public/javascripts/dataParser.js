@@ -12,7 +12,7 @@
 //    xhttp.send();
 function dataParser(callback) {
 
-    this.JSONObject = new Object();
+    this.JSONObject = {};
     this.csvContent = "";
     this.currentUserBookmarks = [];
     this.UserAndBookmarks = [];
@@ -39,33 +39,45 @@ function dataParser(callback) {
     var externalDefer = $.Deferred();
     var topDefer = $.Deferred();
     jQuery.support.cors = true;
+    var paperRequestTimes = 0;
+    var tagRequestTimes = 0;
+    var bookmarkRequestTimes = 0;
+    var tagRecRequestTimes = 0;
+    var bookmarkRecRequestTimes = 0;
+    var bibliRequestTimes = 0;
+    var topRequestTimes = 0;
+    var extRequestTimes = 0;
 
-    var paperRequest = $.ajax({
-        type: "POST",
-        url: "proceedings",
-        //dataType: "json",
-        contentType: 'text/xml',
-        success: function (response) {
-            try {
-                //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                //contentRecXml = $.parseXML(recXml);
-                //externalRecJSON = response;
+    //var paperRequest, bookmarkRequest, tagRequest, tagRecRequest, contentRecRequest, topRec, bibliRec, externalRec;
 
-                    //console.log(bookmarkXml);
-                    //paperXml = paperXml.replace(/\t/g, '');
-                PaperXml = response;
-                    //PaperXml = $.parseXML(response);
+    //var paperRequest = $.ajax({
+    //    type: "POST",
+    //    url: "proceedings",
+    //    //dataType: "json",
+    //    contentType: 'text/xml',
+    //    success: function (response) {
+    //        try {
+    //            //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+    //            //contentRecXml = $.parseXML(recXml);
+    //            //externalRecJSON = response;
+    //
+    //                //console.log(bookmarkXml);
+    //                //paperXml = paperXml.replace(/\t/g, '');
+    //            PaperXml = response;
+    //                //PaperXml = $.parseXML(response);
+    //
+    //        }
+    //        catch (e) {
+    //            console.log("proceedings error");
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get paper list failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(paperDefer.resolve);
 
-            }
-            catch (e) {
-                console.log("proceedings error");
-            }
-        },
-        error: function(){
-            console.log("get paper list failed.");
-        },
-        timeout: 5000
-    }).complete(paperDefer.resolve);
+    paperRequestLoop();
 
     //var paperRequest = $.ajax({
     //    type: "POST",
@@ -176,111 +188,119 @@ function dataParser(callback) {
     //    }
     //});
 
-    var bookmarkReqeust = $.ajax({
-        type: "POST",
-        url: "bookmarks",
-        //url: "http://halley.exp.sis.pitt.edu/cn3/xml/scheduling.xml.php?conferenceID=137"+ "&timestamp=" + new Date(),
-        contentType: 'text/xml',
-        success: function (bookmarkXml) {
-            try {
-                BookmarkXml = bookmarkXml;
-            }
-            catch (e) {
-                console.log(e);
-            }
-        },
-        error: function(){
-            console.log("get bookmark failed.");
-        },
-        timeout: 5000
-    }).complete(bookmarkDefer.resolve);
+    //var bookmarkReqeust = $.ajax({
+    //    type: "POST",
+    //    url: "bookmarks",
+    //    //url: "http://halley.exp.sis.pitt.edu/cn3/xml/scheduling.xml.php?conferenceID=137"+ "&timestamp=" + new Date(),
+    //    contentType: 'text/xml',
+    //    success: function (bookmarkXml) {
+    //        try {
+    //            BookmarkXml = bookmarkXml;
+    //        }
+    //        catch (e) {
+    //            console.log(e);
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get bookmark failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(bookmarkDefer.resolve);
 
-    var tagRequest = $.ajax({
-        type: "POST",
-        url: "tags",
-        //url: "http://halley.exp.sis.pitt.edu/cn3/xml/tagging.xml.php?conferenceID=137"+ "&timestamp=" + new Date(),
-        contentType: 'text/xml',
-        success: function (tagXml) {
-            try {
-                //tagXml = tagXml.replace(/\t/g, '');
-                //TagXml = $.parseXML(tagXml);
-                TagXml = tagXml
-            }
-            catch (e) {
-                console.log("tag error");
-            }
-        },
-        error: function(){
-            console.log("get tag failed.");
-        },
-        timeout: 5000
-    }).complete(tagDefer.resolve);
+    //userReuqestLoop();
+    //tagRequestLoop();
+    //tagRecRequestLoop();
+    //bookmarkRecRequestLoop();
+    //topRequestLoop();
+    //extRequestLoop();
+    //bibliRequestLoop();
 
-    var externalRec = $.ajax({
-        type: "POST",
-        url: "external",
-        data: JSON.stringify({userid: currentUserID}),
-        dataType: "json",
-        contentType: 'application/json',
-        success: function (response) {
-            try {
-                //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                //contentRecXml = $.parseXML(recXml);
-                externalRecJSON = response;
-            }
-            catch (e) {
-                console.log("external rec error");
-            }
-        },
-        error: function(){
-            console.log("get recommendations failed.");
-        },
-        timeout: 5000
-    }).complete(externalDefer.resolve);
-
-    var topRec = $.ajax({
-        type: "POST",
-        url: "top",
-        //data: JSON.stringify({userid: currentUserID}),
-        //dataType: "json",
-        contentType: 'application/json',
-        success: function (response) {
-            try {
-                //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                //contentRecXml = $.parseXML(recXml);
-                topJSON = response;
-            }
-            catch (e) {
-                console.log("top rec error");
-            }
-        },
-        error: function(){
-            console.log("get recommendations failed.");
-        },
-        timeout: 5000
-    }).complete(topDefer.resolve);
-
-    var bibliRec = $.ajax({
-        type: "POST",
-        url: "bibli",
-        data: JSON.stringify({userid: currentUserID}),
-        dataType: "json",
-        contentType: 'application/json',
-        success: function (response) {
-            try {
-                //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                //contentRecXml = $.parseXML(recXml);
-                bibliJSON = response;
-            }
-            catch (e) {
-                console.log("bibli error");
-            }
-        },
-        error: function(){
-            console.log("get recommendations failed.");
-        },
-        timeout: 5000
-    }).complete(bibliDefer.resolve);
+    //var tagRequest = $.ajax({
+    //    type: "POST",
+    //    url: "tags",
+    //    //url: "http://halley.exp.sis.pitt.edu/cn3/xml/tagging.xml.php?conferenceID=137"+ "&timestamp=" + new Date(),
+    //    contentType: 'text/xml',
+    //    success: function (tagXml) {
+    //        try {
+    //            //tagXml = tagXml.replace(/\t/g, '');
+    //            //TagXml = $.parseXML(tagXml);
+    //            TagXml = tagXml
+    //        }
+    //        catch (e) {
+    //            console.log("tag error");
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get tag failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(tagDefer.resolve);
+    //
+    //var externalRec = $.ajax({
+    //    type: "POST",
+    //    url: "external",
+    //    data: JSON.stringify({userid: currentUserID}),
+    //    dataType: "json",
+    //    contentType: 'application/json',
+    //    success: function (response) {
+    //        try {
+    //            //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+    //            //contentRecXml = $.parseXML(recXml);
+    //            externalRecJSON = response;
+    //        }
+    //        catch (e) {
+    //            console.log("external rec error");
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get recommendations failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(externalDefer.resolve);
+    //
+    //var topRec = $.ajax({
+    //    type: "POST",
+    //    url: "top",
+    //    //data: JSON.stringify({userid: currentUserID}),
+    //    //dataType: "json",
+    //    contentType: 'application/json',
+    //    success: function (response) {
+    //        try {
+    //            //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+    //            //contentRecXml = $.parseXML(recXml);
+    //            topJSON = response;
+    //        }
+    //        catch (e) {
+    //            console.log("top rec error");
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get recommendations failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(topDefer.resolve);
+    //
+    //var bibliRec = $.ajax({
+    //    type: "POST",
+    //    url: "bibli",
+    //    data: JSON.stringify({userid: currentUserID}),
+    //    dataType: "json",
+    //    contentType: 'application/json',
+    //    success: function (response) {
+    //        try {
+    //            //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+    //            //contentRecXml = $.parseXML(recXml);
+    //            bibliJSON = response;
+    //        }
+    //        catch (e) {
+    //            console.log("bibli error");
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get recommendations failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(bibliDefer.resolve);
 
 //    function jsonpCallback(data)
 //    {
@@ -306,47 +326,48 @@ function dataParser(callback) {
 //        }
 //    });
 
-    var contentRecRequest = $.ajax({
-        type: "POST",
-        url: "contentbased",
-        data: JSON.stringify({userid: currentUserID}),
-        dataType: "json",
-        contentType: 'application/json',
-        success: function (response) {
-            try {
-                //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                //contentRecXml = $.parseXML(recXml);
-                contentRecJSON = response;
-            }
-            catch (e) {
-                console.log("rec error");
-            }
-        },
-        error: function(){
-            console.log("get recommendations failed.");
-        },
-        timeout: 5000
-    }).complete(contentDefer.resolve);
+    //var contentRecRequest = $.ajax({
+    //    type: "POST",
+    //    url: "contentbased",
+    //    data: JSON.stringify({userid: currentUserID}),
+    //    dataType: "json",
+    //    contentType: 'application/json',
+    //    success: function (response) {
+    //        try {
+    //            //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+    //            //contentRecXml = $.parseXML(recXml);
+    //            contentRecJSON = response;
+    //        }
+    //        catch (e) {
+    //            console.log("rec error");
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get recommendations failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(contentDefer.resolve);
+    //
+    //var tagRecRequest = $.ajax({
+    //    type: "POST",
+    //    url: "tagbased",
+    //    data: JSON.stringify({userid: currentUserID}),
+    //    dataType: "json",
+    //    contentType: 'application/json',
+    //    success: function (recXml) {
+    //        try {
+    //            tagRecJSON = recXml;
+    //        }
+    //        catch (e) {
+    //            console.log("rec error");
+    //        }
+    //    },
+    //    error: function(){
+    //        console.log("get recommendations failed.");
+    //    },
+    //    timeout: 5000
+    //}).complete(tagRecDefer.resolve);
 
-    var tagRecRequest = $.ajax({
-        type: "POST",
-        url: "tagbased",
-        data: JSON.stringify({userid: currentUserID}),
-        dataType: "json",
-        contentType: 'application/json',
-        success: function (recXml) {
-            try {
-                tagRecJSON = recXml;
-            }
-            catch (e) {
-                console.log("rec error");
-            }
-        },
-        error: function(){
-            console.log("get recommendations failed.");
-        },
-        timeout: 5000
-    }).complete(tagRecDefer.resolve);
     //var contentRecRequest1 = $.ajax({
     //    type: "POST",
     //    url: "http://halley.exp.sis.pitt.edu/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=137&userID=" + userID,
@@ -378,8 +399,8 @@ function dataParser(callback) {
     //processRequest();
 
 //user this to wait for all the requests end
-    $.when(bookmarkDefer, tagDefer, tagRecDefer, bibliDefer, externalDefer, contentDefer, topDefer)//paperRequest,  tagRecRequest, contentRecRequest, bibliRec, externalRec, bookmarkReqeust, tagRequest)
-        .done(success);
+//    $.when(paperDefer, bookmarkDefer, tagDefer, tagRecDefer, bibliDefer, externalDefer, contentDefer, topDefer)//paperRequest,  tagRecRequest, contentRecRequest, bibliRec, externalRec, bookmarkReqeust, tagRequest)
+//        .done(success);
     function success() {
         //console.log($(PaperXml).find('RECORD').length);
         //console.log($(SimilarUserXml).find('RECORD').length);
@@ -707,23 +728,23 @@ function dataParser(callback) {
         //write to csv file
         self.csvContent += "name;presentationID;title;authors;";
         if(topRec.length > 0) {
-            self.csvContent += "top-10 agent (" + topRec.length + ");"
+            self.csvContent += "top-10 agent (" + topRec.length + ");";
             start++;
         }
         if(tagRec.length > 0) {
-            self.csvContent += "tag-based agent (" + tagRec.length + ");"
+            self.csvContent += "tag-based agent (" + tagRec.length + ");";
             start++;
         }
         if(contentRec.length > 0) {
-            self.csvContent += "bookmark-based agent (" + contentRec.length + ");"
+            self.csvContent += "bookmark-based agent (" + contentRec.length + ");";
             start++;
         }
         if(bibliRec.length > 0) {
-            self.csvContent += "bibliography agent (" + bibliRec.length + ");"
+            self.csvContent += "bibliography agent (" + bibliRec.length + ");";
             start++;
         }
         if(externalRec.length > 0) {
-            self.csvContent += "ext. bookmarks agent (" + externalRec.length + ");"
+            self.csvContent += "ext. bookmarks agent (" + externalRec.length + ");";
             start++;
         }
         //tag-based agent (10);bookmark-based agent (10);bibliography agent (10);ext. bookmarks agent (10);";
@@ -732,7 +753,7 @@ function dataParser(callback) {
         var index = 3 + start;
 
         //myObject.file = "";
-        self.JSONObject.name = "ECTEL15 Exploration";
+        self.JSONObject.name = "IUI2016 Exploration";
         self.JSONObject.header = 0;
         self.JSONObject.separator = ";";
         self.JSONObject.skip = 0;
@@ -911,4 +932,249 @@ function dataParser(callback) {
     function fail() {
         console.log('fail');
     }
+
+
+    function paperRequestLoop()
+    {
+        paperRequestTimes++;
+        if(paperRequestTimes < 5) {
+            paperRequest = $.ajax({
+                type: "POST",
+                url: "proceedings",
+                //dataType: "json",
+                contentType: 'text/xml',
+                success: function (response) {
+                    try {
+                        //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+                        //contentRecXml = $.parseXML(recXml);
+                        //externalRecJSON = response;
+
+                        //console.log(bookmarkXml);
+                        //paperXml = paperXml.replace(/\t/g, '');
+                        PaperXml = response;
+                        //PaperXml = $.parseXML(response);
+
+                    }
+                    catch (e) {
+                        console.log("proceedings error");
+
+                    }
+                    userReuqestLoop();
+                },
+                error: function () {
+                    console.log("get paper list failed.");
+                    paperRequestLoop();
+                },
+                timeout: 5000
+            }).complete(paperDefer.resolve);
+        }
+        else userReuqestLoop();
+    }
+
+    function userReuqestLoop(){
+        bookmarkRequestTimes++;
+        if(bookmarkRecRequestTimes < 5) {
+            bookmarkRequest = $.ajax({
+                type: "POST",
+                url: "bookmarks",
+                //url: "http://halley.exp.sis.pitt.edu/cn3/xml/scheduling.xml.php?conferenceID=137"+ "&timestamp=" + new Date(),
+                contentType: 'text/xml',
+                success: function (bookmarkXml) {
+                    try {
+                        BookmarkXml = bookmarkXml;
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                    tagRequestLoop()
+                },
+                error: function () {
+                    console.log("get bookmark failed.");
+                    userReuqestLoop();
+                },
+                timeout: 5000
+            }).complete(bookmarkDefer.resolve);
+        }
+        else tagRequestLoop()
+    }
+
+    function tagRequestLoop(){
+        tagRequestTimes++;
+        if(tagRequestTimes < 5) {
+            tagRequest = $.ajax({
+                type: "POST",
+                url: "tags",
+                //url: "http://halley.exp.sis.pitt.edu/cn3/xml/tagging.xml.php?conferenceID=137"+ "&timestamp=" + new Date(),
+                contentType: 'text/xml',
+                success: function (tagXml) {
+                    try {
+                        //tagXml = tagXml.replace(/\t/g, '');
+                        //TagXml = $.parseXML(tagXml);
+                        TagXml = tagXml
+                    }
+                    catch (e) {
+                        console.log("tag error");
+                    }
+                    topRequestLoop();
+                },
+                error: function () {
+                    console.log("get tag failed.");
+                    tagRequestLoop();
+                },
+                timeout: 5000
+            }).complete(tagDefer.resolve);
+        }
+        else topRequestLoop()
+
+    }
+
+    function topRequestLoop(){
+        topRequestTimes++;
+        if(topRequestTimes < 5) {
+            topRec = $.ajax({
+                type: "POST",
+                url: "top",
+                //data: JSON.stringify({userid: currentUserID}),
+                //dataType: "json",
+                contentType: 'application/json',
+                success: function (response) {
+                    try {
+                        //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+                        //contentRecXml = $.parseXML(recXml);
+                        topJSON = response;
+                    }
+                    catch (e) {
+                        console.log("top rec error");
+                    }
+                    tagRecRequestLoop()
+                },
+                error: function () {
+                    console.log("get top rec failed.");
+                    topRequestLoop();
+                },
+                timeout: 5000
+            }).complete(topDefer.resolve);
+        }
+        else tagRecRequestLoop()
+    }
+
+    function tagRecRequestLoop(){
+        tagRecRequestTimes++;
+        if(tagRecRequestTimes < 5) {
+            tagRecRequest = $.ajax({
+                type: "POST",
+                url: "tagbased",
+                data: JSON.stringify({userid: currentUserID}),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (recXml) {
+                    try {
+                        tagRecJSON = recXml;
+                    }
+                    catch (e) {
+                        console.log("rec error");
+                    }
+                    bookmarkRecRequestLoop();
+                },
+                error: function () {
+                    console.log("get tag rec failed.");
+                    tagRecRequestLoop();
+                },
+                timeout: 5000
+            }).complete(tagRecDefer.resolve);
+        }
+        else bookmarkRecRequestLoop();
+    }
+
+    function bookmarkRecRequestLoop(){
+        bookmarkRecRequestTimes++;
+        if(bookmarkRecRequestTimes < 5) {
+            contentRecRequest = $.ajax({
+                type: "POST",
+                url: "contentbased",
+                data: JSON.stringify({userid: currentUserID}),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (response) {
+                    try {
+                        //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+                        //contentRecXml = $.parseXML(recXml);
+                        contentRecJSON = response;
+                    }
+                    catch (e) {
+                        console.log("rec error");
+                    }
+                    extRequestLoop()
+                },
+                error: function () {
+                    console.log("get bookmark rec failed.");
+                    bookmarkRecRequestLoop();
+                },
+                timeout: 5000
+            }).complete(contentDefer.resolve);
+        }
+        else extRequestLoop()
+    }
+
+    function extRequestLoop(){
+        extRequestTimes++;
+        if(extRequestTimes < 5) {
+            externalRec = $.ajax({
+                type: "POST",
+                url: "external",
+                data: JSON.stringify({userid: currentUserID}),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (response) {
+                    try {
+                        //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+                        //contentRecXml = $.parseXML(recXml);
+                        externalRecJSON = response;
+                    }
+                    catch (e) {
+                        console.log("external rec error");
+                    }
+                    bibliRequestLoop()
+                },
+                error: function () {
+                    console.log("get ext failed.");
+                    extRequestLoop();
+                },
+                timeout: 5000
+            }).complete(externalDefer.resolve);
+        }
+        else bibliRequestLoop()
+    }
+
+    function bibliRequestLoop(){
+        bibliRequestTimes++;
+        if(bibliRequestTimes < 5) {
+            bibliRec = $.ajax({
+                type: "POST",
+                url: "bibli",
+                data: JSON.stringify({userid: currentUserID}),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (response) {
+                    try {
+                        //recXml = recXml.replace(/(\r\n|\n|\r|\t)/gm, '');
+                        //contentRecXml = $.parseXML(recXml);
+                        bibliJSON = response;
+                    }
+                    catch (e) {
+                        console.log("bibli error");
+                    }
+                    success()
+                },
+                error: function () {
+                    console.log("get bibli failed.");
+                    bibliRequestLoop();
+                },
+                timeout: 5000
+            }).complete(bibliDefer.resolve);
+        }
+        else success()
+    }
 }
+
+

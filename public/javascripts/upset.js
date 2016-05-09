@@ -204,7 +204,7 @@ function UpSet() {
                                 descriptionText = descriptionText.slice(0, -2);
                                 descriptionText += "."
                             }
-                            else descriptionText += "but not related to the rest of the selected sets."
+                            else descriptionText += "but not related to the rest of the selected sets.";
                             count++;
                         }
                         else {
@@ -263,7 +263,7 @@ function UpSet() {
             selections.addSelection(selection, false);
             selections.setActive(selection);
             $("#element-view-description").text(descriptionText).css("color", selections.getColor(selection));
-        }
+        };
 
         //console.log(ctx.setVisWidth + "     " + ctx.w);
 
@@ -311,7 +311,7 @@ function UpSet() {
 //                console.log("iS", collector.allItems);
 //            }
 
-        })
+        });
 
 //        d3.max(usedSets, function(d){})
 
@@ -336,7 +336,7 @@ function UpSet() {
                 case "S":
                     d.value = d3.max(usedSets, function (d) {
                         return d.items.length
-                    })
+                    });
                     break;
                 default:
                     break;
@@ -357,7 +357,7 @@ function UpSet() {
         ctx.svgBody = d3.select('#bodyVis')
 //            .style('width', ctx.w + "px")
             .append('svg')
-            .attr('width', ctx.w)
+            .attr('width', ctx.w);
 
 //        ctx.vis = ctx.svgBody.append("g").attr({
 //            class: "svgRows",
@@ -384,7 +384,7 @@ function UpSet() {
             .attr({
                 'class': 'gRows',
                 //"transform":"translate("+ctx.leftOffset+","+0+")"
-            })
+            });
 
         // tooltips on top !
         ctx.toolTipLayer = ctx.svgBody.append("g").attr({class:"toolTipLayer"});
@@ -432,7 +432,7 @@ function UpSet() {
         //    });
         ctx.guildHeader = ctx.svgHeader.append("g").attr({
             class: "guildHeader"
-        })
+        });
         ctx.guildHeader.append("circle")
             //    .attr('cx', function (d, i) {
             //    return (ctx.cellWidth) * i + ctx.cellWidth / 2;
@@ -451,7 +451,7 @@ function UpSet() {
         ctx.guildHeader.append("text").attr({
             class: 'cellGuild',
             "transform":"translate(30"+",12"+")"
-        }).text("Papers recommended by the agent, bookmarked by the user, or tagged with the tag.")
+        }).text("Papers recommended by the agent, bookmarked by the user, or tagged with the tag.");
         ctx.guildHeader.append("circle")
             .attr({
                 r: ctx.cellSize / 4 - 2,
@@ -467,7 +467,7 @@ function UpSet() {
         ctx.guildHeader.append("text").attr({
             class: 'cellGuild',
             "transform":"translate(30"+",32"+")"
-        }).text("Papers not recommended by the agent, bookmarked by the user, or tagged with the tag.")
+        }).text("Papers not recommended by the agent, bookmarked by the user, or tagged with the tag.");
         ctx.guildHeader.append("circle")
             .attr({
                 r: ctx.cellSize / 4 - 2,
@@ -483,7 +483,7 @@ function UpSet() {
         ctx.guildHeader.append("text").attr({
             class: 'cellGuild',
             "transform":"translate(30"+",52"+")"
-        }).text("Papers bookmarked by the current user.")
+        }).text("Papers bookmarked by the current user.");
 
 
         ctx.tableHeaderNode = ctx.svgHeader.append("g").attr({
@@ -529,7 +529,7 @@ function UpSet() {
 
         plotSubSets();
 
-        initCallback = [dataSetChanged] //TODO: bad hack !!!
+        initCallback = [dataSetChanged]; //TODO: bad hack !!!
 
         updateFrames($(window).height(), null);
 
@@ -580,7 +580,7 @@ function UpSet() {
 
         ctx.svgBody.attr({
             width: (Math.max(ctx.w, 400))
-        })
+        });
 
         updateHeaders();
         plotSubSets();
@@ -609,11 +609,11 @@ function UpSet() {
                 type: "radio",
                 id: "sortIntersectionSizeAscend",
                 name: "sort"
-            })
+            });
         var label1 = check1.append("label")
             .attr({
                 for: "sortIntersectionSizeAscend"
-            })
+            });
             //.text('Ascending');
             label1.append("img")
             .attr({
@@ -629,11 +629,11 @@ function UpSet() {
                 type: "radio",
                 id: "sortIntersectionSize",
                 name: "sort"
-            })
+            });
         var label2 = check2.append("label")
             .attr({
                 for: "sortIntersectionSize"
-            })
+            });
         //.text('Ascending');
         label2.append("img")
             .attr({
@@ -649,11 +649,11 @@ function UpSet() {
                 type: "radio",
                 id: "sortNrSetsInIntersectionAscend",
                 name: "sort"
-            })
+            });
         var label3 = check3.append("label")
             .attr({
                 for: "sortNrSetsInIntersectionAscend"
-            })
+            });
         //.text('Ascending');
         label3.append("img")
             .attr({
@@ -669,11 +669,11 @@ function UpSet() {
                 type: "radio",
                 id: "sortNrSetsInIntersectionDescend",
                 name: "sort"
-            })
+            });
         var label4 = check4.append("label")
             .attr({
                 for: "sortNrSetsInIntersectionDescend"
-            })
+            });
         //.text('Ascending');
         label4.append("img")
             .attr({
@@ -684,7 +684,7 @@ function UpSet() {
         label4.append('text').text("Descending");
 
         if(ctx.sortCheck != "")
-            d3.select("#"+ctx.sortCheck).attr('checked', 'true')
+            d3.select("#"+ctx.sortCheck).attr('checked', 'true');
         setUpSortSelections();
         //<div id="sortConfig" class="configTable">
     //        <div class="configHeader">Sort by</div>
@@ -716,27 +716,27 @@ function UpSet() {
         var setRowScale = d3.scale.ordinal().rangeRoundBands([0, usedSets.length * (ctx.cellWidth)], 0);
         setRowScale.domain(usedSets.map(function (d) {
             return d.id
-        }))
+        }));
 
         var setRows = tableHeaderNode.selectAll('.setRow')
             .data(usedSets, function (d) {
                 return d.elementName
-            })
+            });
 
         var setRowsEnter = setRows.enter()
             .append('g').attr({
                 class: "setRow"
-            })
+            });
 
         setRows.exit().remove();
 
         var setRects = setRows.selectAll(".sortHeaderGroup").data(function (d, i) {
             return [d]
-        })
+        });
 
         var setRectsEnter = setRects.enter().append("g").attr({
             class: "sortHeaderGroup"
-        })
+        });
 
         setRectsEnter
             .append('text')
@@ -751,7 +751,7 @@ function UpSet() {
                 document.getElementById("tipbar").innerHTML = "Click to remove [ " + d.elementName +" ] from the view."
             }).on("mouseout", function(d){
                 document.getElementById("tipbar").innerHTML = ""
-            })
+            });
         setRectsEnter
             .append("rect")
             .attr({
@@ -813,10 +813,10 @@ function UpSet() {
 
         var setRowsText = setRowsEnter.selectAll("text").data(function (d) {
             return [d]
-        })
+        });
         var headerText = setRowsEnter
         //setRectsEnter
-            .append("text")
+            .append("text");
             headerText.text(
             function (d) {
 
@@ -859,7 +859,7 @@ function UpSet() {
             .on('mouseout', function(){
                 document.getElementById("tipbar").innerHTML = "";
                     mouseoutColumn()
-            })
+            });
             headerText.append("svg:title")
             .text(function (d, i) {
                 var names = setIdToSet[d.id].elementName.split(/\(|\)|\//g);
@@ -980,17 +980,17 @@ function UpSet() {
     function addStatisticColumn(){
         var allAttributes = attributes.filter(function(d){
             return d.type=="integer" || d.type=="float"
-        })
+        });
 
         allAttributes.unshift(ctx.nameForRelevance);
         // find first not-used
 
 
-        var delList = allAttributes.map(function(d){return d})
+        var delList = allAttributes.map(function(d){return d});
 
         ctx.summaryStatisticVis.forEach(function(stat){
             delList.remove(stat.attribute);
-        })
+        });
 
         //console.log(delList);
 
@@ -999,7 +999,7 @@ function UpSet() {
 
 
     function updateHeaders() {
-        setDynamicVisVariables()
+        setDynamicVisVariables();
         //calculateGlobalStatistics();
         //console.log("update header");
 
@@ -1128,7 +1128,7 @@ function UpSet() {
               }else {
                   var offset_y = ctx.textHeight;
                   if (d.data.level == 2)
-                      offset_y += 10
+                      offset_y += 10;
                   return 'translate(0, ' + offset_y + ')';
               }
           }, class: function (d) {
@@ -1171,7 +1171,7 @@ function UpSet() {
                                 tagName += names[0].trim() + ", ";
                                 break;
                         }
-                    })
+                    });
 
                     descriptionText = "Click to view papers ";
                     if (agentName != "")
@@ -1208,17 +1208,17 @@ function UpSet() {
                       ctx.intersectionClicked(d);
                   }
               }
-        })
+        });
 
       // Anticipating future overlays
-      rowSubSets.append("g").attr("class", "gBackgroundRect")
-      rowSubSets.append("g").attr("class", "gHorizon")
-      rowSubSets.append("g").attr("class", "gOverlays")
-      rowSubSets.append("g").attr("class", "gIndicators")
+      rowSubSets.append("g").attr("class", "gBackgroundRect");
+      rowSubSets.append("g").attr("class", "gHorizon");
+      rowSubSets.append("g").attr("class", "gOverlays");
+      rowSubSets.append("g").attr("class", "gIndicators");
       
       subSets.exit().remove();
 
-      var subSetTransition = subSets
+      var subSetTransition = subSets;
       if (ctx.rowTransitions && usedSets.length<10)
           subSetTransition = subSets
               .transition().duration(function (d, i) {
@@ -1226,7 +1226,7 @@ function UpSet() {
                       return queryParameters['duration'];
                   else
                       return queryParameters['duration'];
-              })
+              });
       subSetTransition.attr({transform: function (d) {
         return 'translate(0, ' + ctx.rowScale(d.id) + ')';
           
@@ -1242,7 +1242,7 @@ function UpSet() {
         //console.log("update set rows");
         var backgrounds = subsetRows.select(".gBackgroundRect").selectAll(".backgroundRect").data(function (d) {
             return [d]
-        })
+        });
         backgrounds.enter()
             .append("rect").attr({
                 class: "backgroundRect",
@@ -1254,7 +1254,7 @@ function UpSet() {
             .style({
                 "fill-opacity": 0.0001,
                 fill: ctx.backHighlightColor // for debugging
-            })
+            });
         //    .on({
         //    'mouseover': mouseoverRow,
         //    'mouseout': mouseoutRow
@@ -1264,25 +1264,25 @@ function UpSet() {
         backgrounds.attr({
             width: ctx.setVisWidth,
             height: ctx.cellSize
-        })
+        });
 
         var combinationGroups = subsetRows.selectAll('g.combination').data(function (d) {
                 // binding in an array of size one
                 return [d.data.combinedSets];
             }
-        )
+        );
 
         combinationGroups.enter()
             .append('g')
             .attr({class: 'combination'
-            })
+            });
         combinationGroups.exit().remove();
 
         var cells = combinationGroups.selectAll('.cell').data(function (d) {
             return d.map(function (dd, i) {
                 return {data: usedSets[i], value: dd}
             });
-        })
+        });
         // ** init
         cells.enter()
             .append('circle')
@@ -1296,8 +1296,8 @@ function UpSet() {
                 //    mouseoverCell(d3.select(this).node().parentNode.parentNode.__data__, i)
                 //},
                 //'mouseout': mouseoutCell
-            })
-        cells.exit().remove()
+            });
+        cells.exit().remove();
 
         //** update
         cells.attr('cx', function (d, i) {
@@ -1340,7 +1340,7 @@ function UpSet() {
                         .filter(function (dd, i) {
                             return dd >= 0;
                         })
-                )
+                );
 
                 // dont do anything if there is only one (or none) cell
                 if (extent[0] == extent[1]) return [];
@@ -1405,17 +1405,17 @@ function UpSet() {
                     f.data.setSize = max_scale;
                 i++;
                 return f;
-            })
+            });
 
             g.selectAll(".cutlines").remove();
 
             if (Math.ceil(e.data.setSize / max_scale) > ctx.maxLevels) {
                 //console.log("cutlines");
-                var g_lines = g.selectAll(".cutlines").data([e.id]).enter().append("g").attr("class", "cutlines")
+                var g_lines = g.selectAll(".cutlines").data([e.id]).enter().append("g").attr("class", "cutlines");
 
                 g_lines.append("line")
                     .attr({x1: ctx.xStartSetSizes + ctx.subSetSizeWidth-30, x2: ctx.xStartSetSizes + ctx.subSetSizeWidth-20, y1: 0, y2: 30})
-                    .style({'stroke': 'white', 'stroke-width': 1})
+                    .style({'stroke': 'white', 'stroke-width': 1});
 
                 g_lines.append("line")
                     .attr({x1: ctx.xStartSetSizes + ctx.subSetSizeWidth-35, x2: ctx.xStartSetSizes + ctx.subSetSizeWidth-25, y1: 0, y2: 30})
@@ -1423,15 +1423,15 @@ function UpSet() {
             }
 
             // Add new layers
-            var layers_enter = g.selectAll(".gHorizon").selectAll(".row-type-subset").data(data).enter()
+            var layers_enter = g.selectAll(".gHorizon").selectAll(".row-type-subset").data(data).enter();
 
             layers_enter.append('rect')
                 .attr("class", function (d) {
                     return ( 'subSetSize row-type-subset' );
-                })
+                });
 
             // Remove useless layers
-            g.selectAll(".row-type-subset").data(data).exit().remove()
+            g.selectAll(".row-type-subset").data(data).exit().remove();
 
             // Update current layers
             g.selectAll(".row-type-subset")
@@ -1453,7 +1453,7 @@ function UpSet() {
                 })
                 .style({
                     fill:function(d,i){ return ctx.horizonBarGrays(i);}
-                })
+                });
 //                .style("opacity", function (d, i) {
 //                    if (nbLevels == 1)
 //                        return .8;
@@ -1499,7 +1499,7 @@ function UpSet() {
             height: ctx.cellSize,
             x: -ctx.leftOffset,
             y: 0
-        })
+        });
 //            .on('click', function (d) {
 //                collapseGroup(d.data);
 //                updateStatistics();
@@ -1587,7 +1587,7 @@ function UpSet() {
 
         var collapseIcon = groupRows.selectAll(".collapseIcon").data(function (d) {
             return [d];
-        })
+        });
         collapseIcon.enter()
             .append("text")
             .attr({
@@ -1609,18 +1609,18 @@ function UpSet() {
             }
             }).style({
                 "font-size": "16pt"
-            })
+            });
 
         // -- Decoration for Filter Groups
         var allQueryGroups = groupRows.filter(function (d) {
             return (d.data instanceof QueryGroup)
-        })
+        });
         var groupDeleteIcon = allQueryGroups.selectAll(".groupDeleteIcon").data(function (d) {
             return [d]
-        })
+        });
         var groupDeleteIconEnter = groupDeleteIcon.enter().append("g").attr({
             class: "groupDeleteIcon"
-        })
+        });
 //        groupDeleteIconEnter.append("rect").attr({
 //            x:-5,
 //            y:-10,
@@ -1637,7 +1637,7 @@ function UpSet() {
                     UpSetState.logicGroups.forEach(function (dd, i) {
 
                         if (dd.id == d.id) index = i;
-                    })
+                    });
 
                     UpSetState.logicGroups.splice(index, 1);
 
@@ -1647,12 +1647,12 @@ function UpSet() {
                     updateState();
                     rowTransition();
                 }
-            }).style({ "fill": "#f46d43"})
+            }).style({ "fill": "#f46d43"});
 
 
         groupDeleteIcon.attr({
             "transform": "translate(" + (ctx.xStartSetSizes - 12) + "," + (ctx.cellSize / 2 + 4) + ")"
-        })
+        });
 
 
         // --- circles for Groups with combinedSets element set --- ///
@@ -1660,17 +1660,17 @@ function UpSet() {
         function decorateGroupsWithCells(){
             var nonLogicGroups =  groupRows.filter(function (d) {
                 return  ("combinedSets" in d.data); //!(d.data instanceof QueryGroup) &&
-            })
+            });
             var combinationGroups = nonLogicGroups.selectAll('g.combination').data(function (d) {
                     // binding in an array of size one
                     return [d.data.combinedSets];
                 }
-            )
+            );
 
             combinationGroups.enter()
                 .append('g')
                 .attr({class: 'combination'
-                })
+                });
             combinationGroups.exit().remove();
 
 
@@ -1679,17 +1679,17 @@ function UpSet() {
                 return d.map(function (dd, i) {
                     return {data: usedSets[i], value: dd}
                 });
-            })
+            });
             // ** init
             cells.enter()
-                .append('circle')
+                .append('circle');
             //.on({
             //    'mouseover': function (d, i) {
             //        mouseoverCell(d3.select(this).node().parentNode.parentNode.__data__, i)
             //    },
             //    'mouseout': mouseoutCell
             //})
-            cells.exit().remove()
+            cells.exit().remove();
 
             //** update
             cells.attr('cx', function (d, i) {
@@ -1703,10 +1703,10 @@ function UpSet() {
                 .style('fill', function (d) {
                     switch(d.value)
                     {case 0: //logicState.NOT
-                        return ctx.grays[0]
+                        return ctx.grays[0];
                         break;
                         case 1: //logicState.MUST
-                            return ctx.grays[1]
+                            return ctx.grays[1];
                             break;
                         default: // logicState.DONTCARE
                             return "url(#DontCarePattern)"}
@@ -1726,16 +1726,16 @@ function UpSet() {
         function decorateComplexQueries() {
             var complexLogicGroups =  groupRows.filter(function (d) {
                 return  ("orClauses" in d.data && d.data.orClauses.length>1); //!(d.data instanceof QueryGroup) &&
-            })
+            });
             var combinationGroups = complexLogicGroups.selectAll('g.complexCombination').data(function (d) {
                     // binding in an array of size one
                     return [d.data.orClauses];
                 }
-            )
+            );
             combinationGroups.enter()
                 .append('g')
                 .attr({class: 'complexCombination'
-                })
+                });
             combinationGroups.exit().remove();
 
 
@@ -1762,7 +1762,7 @@ function UpSet() {
                                 class:"toolTipQuery",
                                 "transform":"translate("+
                                     (+xy[1]+ctx.leftOffset-5)+","+
-                                    (+xy[2]+ctx.cellSize+5)+")"})
+                                    (+xy[2]+ctx.cellSize+5)+")"});
                             infoGroup.style({
                                 "opacity":.00001
                             }).transition().style({
@@ -1788,7 +1788,7 @@ function UpSet() {
                                     "stroke-width":2,
                                     "stroke":ctx.grays[1],
                                     "fill":ctx.grays[0]
-                                })
+                                });
 
 
 
@@ -1800,7 +1800,7 @@ function UpSet() {
                                 var actualRow = infoGroup.append("g").attr({
                                     class:"combination",
                                     "transform":"translate("+0+","+y+")"
-                                })
+                                });
 
                                 actualRow.selectAll('.cell').data(function (d) { return Object.keys(row).map(function(key){return row[key];})})
                                 .enter()
@@ -1817,10 +1817,10 @@ function UpSet() {
 
                                         switch(d.state)
                                         {case 0: //logicState.NOT
-                                            return ctx.grays[0]
+                                            return ctx.grays[0];
                                             break;
                                             case 1: //logicState.MUST
-                                                return ctx.grays[1]
+                                                return ctx.grays[1];
                                                 break;
                                             default: // logicState.DONTCARE
                                                 return "url(#DontCarePattern)"}
@@ -1956,16 +1956,16 @@ function UpSet() {
                     f.data.setSize = max_scale;
                 i++;
                 return f;
-            })
+            });
 
             g.selectAll(".cutlines").remove();
 
             if (Math.ceil(e.data.setSize / max_scale) > ctx.maxLevels) {
-                var g_lines = g.selectAll(".cutlines").data([e.id]).enter().append("g").attr("class", "cutlines")
+                var g_lines = g.selectAll(".cutlines").data([e.id]).enter().append("g").attr("class", "cutlines");
 
                 g_lines.append("line")
                     .attr({x1: ctx.xStartSetSizes + ctx.subSetSizeWidth-30, x2: ctx.xStartSetSizes + ctx.subSetSizeWidth-20, y1: 0, y2: 30})
-                    .style({'stroke': 'white', 'stroke-width': 1})
+                    .style({'stroke': 'white', 'stroke-width': 1});
 
                 g_lines.append("line")
                     .attr({x1: ctx.xStartSetSizes + ctx.subSetSizeWidth-35, x2: ctx.xStartSetSizes + ctx.subSetSizeWidth-25, y1: 0, y2: 30})
@@ -1973,16 +1973,16 @@ function UpSet() {
             }
 
             // Add new layers
-            var layers_enter = g.select(".gHorizon").selectAll(".row-type-group").data(data).enter()
+            var layers_enter = g.select(".gHorizon").selectAll(".row-type-group").data(data).enter();
 
             layers_enter.append('rect')
                 .attr("class", function (d) {
                     return ( 'subSetSize row-type-group' );
 
-                })
+                });
 
             // Remove useless layers
-            g.selectAll(".row-type-group").data(data).exit().remove()
+            g.selectAll(".row-type-group").data(data).exit().remove();
 
             // Update current layers
             g.selectAll(".row-type-group")
@@ -2026,7 +2026,7 @@ function UpSet() {
     function updateRelevanceBars(allRows) {
         var expectedValueBars = allRows.selectAll(".disproportionality").data(function (d) {
             return [d]
-        })
+        });
 
         expectedValueBars.enter()
             .append('rect')
@@ -2046,21 +2046,21 @@ function UpSet() {
                     else
                         return ctx.cellSize-4;// / 3;
                 }
-            })
+            });
             //.on('mouseover', mouseoverRow)
             //.on('mouseout', mouseoutRow)
 
-        expectedValueBars.exit().remove()
+        expectedValueBars.exit().remove();
 
         // transition for subsets
         changeTheValues(expectedValueBars.filter(function (d) {
             return (d.data.type === ROW_TYPE.SUBSET)
-        }).transition())
+        }).transition());
 
         // no transition for groups
         changeTheValues(expectedValueBars.filter(function (d) {
             return (d.data.type !== ROW_TYPE.SUBSET)
-        }))
+        }));
 //        expectedValueBars.transition()
 
         function changeTheValues(node) {
@@ -2106,7 +2106,7 @@ function UpSet() {
             detailStatisticElements.exit().remove();
             detailStatisticElements.enter().append("g").attr({
                 class:function(d){return "detailStatistic"}
-            })
+            });
 
 
 
@@ -2130,7 +2130,7 @@ function UpSet() {
             return;
         }
 
-        var currentRowSize = 0
+        var currentRowSize = 0;
 
         allRows.selectAll(".what").remove();
         allRows.selectAll(".newOverlay").remove();
@@ -2188,7 +2188,7 @@ function UpSet() {
             var data = d3.range(nbLevels).map(function () {
                 var f = {};
                 f.data = {};
-                f.data.setSize = currentRowSize
+                f.data.setSize = currentRowSize;
                 f.data.type = e.data.type;
                // Prevent empty bar when right on 1-level value
                 if(nbLevels==1 && currentRowSize > 0 && (currentRowSize % max_scale == 0)) {
@@ -2203,18 +2203,18 @@ function UpSet() {
                 i++;
 
                 return f;
-            })
+            });
 
             //console.log(data);
 
             // Add new layers
-            var layers_enter = g.selectAll(".gOverlays").selectAll(".newOverlay").data(data).enter()
+            var layers_enter = g.selectAll(".gOverlays").selectAll(".newOverlay").data(data).enter();
 
             layers_enter.append('rect')
-                .attr("class", "newOverlay")
+                .attr("class", "newOverlay");
 
             // Remove useless layers
-            g.selectAll(".newOverlay").data(data).exit().remove()
+            g.selectAll(".newOverlay").data(data).exit().remove();
 
             // Update current layers
             //console.log("update overlay");
@@ -2262,8 +2262,8 @@ function UpSet() {
                         return .5 + i * .2;
                     else
                         return .2 + i * .3;
-                })
-                //.on('click', function () {
+                });;
+            //.on('click', function () {
                 //  ctx.intersectionClicked(e);
                 //})
                 //.on('mouseover', function () {
@@ -2273,7 +2273,7 @@ function UpSet() {
                 //    mouseoutRow(e);
                 //})
 
-        })
+        });
 
 
 /*
@@ -2397,7 +2397,7 @@ function UpSet() {
             return[d]
         });
         barLabels.enter().append('text')
-            .attr({class: 'intersectionSizeText intersectionSizeLabel noselect'})
+            .attr({class: 'intersectionSizeText intersectionSizeLabel noselect'});
             //.on('click', function (d) {
             //    ctx.intersectionClicked(d)
             //});
@@ -2405,8 +2405,8 @@ function UpSet() {
 
         var barLabelChanges = barLabels.text(function (d) {
             return d.data.setSize;
-        })
-        if (ctx.barTransitions) barLabelChanges.transition()
+        });
+        if (ctx.barTransitions) barLabelChanges.transition();
         barLabelChanges.attr({class: 'intersectionSizeText intersectionSizeLabel noselect',
             y: ctx.cellSize / 2,
             x: function (d) {
@@ -2425,7 +2425,7 @@ function UpSet() {
                 "stroke": "none",
                 fill: ctx.backHighlightColor,
                 opacity: 0
-            })
+            });
             columnBackgrounds.exit().remove();
             columnBackgrounds.attr({
                 'x': function (d, i) {
@@ -2463,13 +2463,13 @@ function UpSet() {
                 //console.log(r.id);
                 return true;
             }
-        })
+        });
 
         var setScale = d3.scale.ordinal().domain([0, 1]).range(ctx.grays);
 
         var subSetRows = allRows.filter(function (d) {
             return d.data.type === ROW_TYPE.SUBSET;
-        })
+        });
 
         // decorate subset rows
         updateSubsetRows(subSetRows, setScale);
@@ -2478,7 +2478,7 @@ function UpSet() {
             if (d.data.type === ROW_TYPE.GROUP || d.data.type === ROW_TYPE.AGGREGATE)
                 return true;
             return false;
-        })
+        });
 
         // decorate GroupRows
         updateGroupRows(groupRows);
@@ -2502,10 +2502,10 @@ function UpSet() {
 //        separatorColumns.append("")
 
         if (separatorRow!=null){
-            var sepRowLine = separatorRow.selectAll(".gSeparatorLine").data([1])
+            var sepRowLine = separatorRow.selectAll(".gSeparatorLine").data([1]);
             sepRowLine.enter().append("line").attr({
                     class:"gSeparatorLine"
-                })
+                });
 
             sepRowLine.attr({
                 x1:-ctx.leftOffset,
@@ -2524,7 +2524,7 @@ function UpSet() {
                     //setTimeout(mouseoutColumn, 3000);
                     ctx.newlyAddedSet = "";
                 }
-            })
+            });
 
         // Adjust the row height
         d3.select(".divForeign").select("svg").attr("height", renderRows.length * ctx.cellDistance);
@@ -2695,7 +2695,7 @@ function UpSet() {
             //$('text[id="' + setIdToSet[globalSetId].elementName + '"]').text(newStr)
             //    .attr("id", newStr);
             d3.select('#' + globalSetId).text(newStr).append("svg:title")
-                .text("Papers bookmarked by you.")
+                .text("Papers bookmarked by you.");
                 //.attr("id", newStr);
             setIdToSet[globalSetId].itemList[data] = 1;
             setIdToSet[globalSetId].elementName = newStr;
@@ -2710,7 +2710,7 @@ function UpSet() {
 
             //var ids = globalSetId.split("_");
             //console.log(attributes[attributes.length - 1].values[data]);
-            attributes[attributes.length - 1].values[data].push(globalSetId);
+            //attributes[attributes.length - 1].values[data].push(globalSetId);
 
             subSets.length = 0;
             dataRows.length = 0;
@@ -2723,12 +2723,12 @@ function UpSet() {
             initCallback.forEach(function (callback) {
                 callback();
             })
-        })
+        });
         $(EventManager).bind("vis-svg-resize", function (event, data) {
             //vis-svg-resize", { newWidth:+(leftWidth + (endX - startX)) });
             updateFrames(null, data.newWidth);
-            updateHeaders()
-            plotSubSets()
+            updateHeaders();
+            plotSubSets();
             plotSetOverview()
 
         });
@@ -2782,11 +2782,11 @@ function UpSet() {
         if (UpSetState.grouping==undefined){
             d3.select("#secondLevelGroupingSelect").attr({disabled:true})
         }else{
-            d3.select("#secondLevelGroupingSelect").attr({disabled:null})
+            d3.select("#secondLevelGroupingSelect").attr({disabled:null});
             var selectableOptions = {};
             Object.keys(ctx.groupingOptions).forEach(function(key){
                 if (key!=UpSetState.grouping) selectableOptions[key] = ctx.groupingOptions[key];
-            })
+            });
 
          //   console.log("updateL2:",selectableOptions);
 
@@ -2841,7 +2841,7 @@ function UpSet() {
                 }
 
 
-            })
+            });
 
 
 
@@ -3020,7 +3020,7 @@ function UpSet() {
         d3.selectAll('#sortNrSetsInIntersectionAscend').on(
             'click',
             function (d) {
-                ctx.sortCheck = 'sortNrSetsInIntersectionAscend'
+                ctx.sortCheck = 'sortNrSetsInIntersectionAscend';
                 UpSetState.sorting = StateOpt.sortByCombinationSizeAscend;
 //                UpSetState.grouping = undefined;
 //                UpSetState.levelTwoGrouping = undefined;
@@ -3034,7 +3034,7 @@ function UpSet() {
         d3.selectAll('#sortNrSetsInIntersectionDescend').on(
             'click',
             function (d) {
-                ctx.sortCheck = 'sortNrSetsInIntersectionDescend'
+                ctx.sortCheck = 'sortNrSetsInIntersectionDescend';
                 UpSetState.sorting = StateOpt.sortByCombinationSizeDescend;
 //                UpSetState.grouping = undefined;
 //                UpSetState.levelTwoGrouping = undefined;
@@ -3064,7 +3064,7 @@ function UpSet() {
         d3.selectAll('#sortIntersectionSize').on(
             'click',
             function (d) {
-                ctx.sortCheck = 'sortIntersectionSize'
+                ctx.sortCheck = 'sortIntersectionSize';
                 UpSetState.sorting = StateOpt.sortBySubSetSize;
                 var date = new Date();
                 userBehavior.push({type: 2, sort: [{name: "sort by set sizes Descending", type: 9}], time: (date.getDate()<10?'0':'') + date.getDate()  + " @ " + (date.getHours()<10?'0':'') + date.getHours()  + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes()  + ":" + (date.getSeconds()<10?'0':'') + date.getSeconds()});
@@ -3077,7 +3077,7 @@ function UpSet() {
         d3.selectAll('#sortIntersectionSizeAscend').on(
             'click',
             function (d) {
-                ctx.sortCheck = 'sortIntersectionSizeAscend'
+                ctx.sortCheck = 'sortIntersectionSizeAscend';
                 UpSetState.sorting = StateOpt.sortBySubSetSizeAscend;
                 var date = new Date();
                 userBehavior.push({type: 2, sort: [{name: "sort by set sizes Ascending", type: 8}], time: (date.getDate()<10?'0':'') + date.getDate()  + " @ " + (date.getHours()<10?'0':'') + date.getHours()  + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes()  + ":" + (date.getSeconds()<10?'0':'') + date.getSeconds()});
@@ -3132,17 +3132,17 @@ function UpSet() {
         updateHeaders();
         plotSubSets();
         ctx.rowTransitions = true
-    }
+    };
 
     //ctx.updateHeaders = updateHeaders;
     ctx.updateColumnBackgrounds = updateColumnBackgrounds;
-    ctx.plot = rowTransition
+    ctx.plot = rowTransition;
     ctx.plotTable = function () {
         ctx.barTransitions = false;
         //console.log("plot table");
         plotSubSets();
         ctx.barTransitions = true;
-    }
+    };
 
     //ctx.resizeSetView = updateFrames
 //    function(windowHeight, windowWidth){
@@ -3179,10 +3179,10 @@ function UpSet() {
         } else if (windowHeight == null) {
             ctx.svgBody.attr({
                 width: (Math.max(ctx.w, 500))
-            })
+            });
             ctx.svgHeader.attr({
                 //width: (Math.max(windowWidth, 500))
-            })
+            });
 
             var totalWidthMax = ctx.cellWidth * usedSets.length + ctx.majorPadding //+ ctx.leftOffset
                 + ctx.subSetSizeWidthMax + 50;
@@ -3205,7 +3205,7 @@ function UpSet() {
         }
     }
 
-    setUpSortSelections()
+    setUpSortSelections();
     initData(ctx, [init]);
 //    init();
 

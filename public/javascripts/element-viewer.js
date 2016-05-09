@@ -307,7 +307,7 @@ ElementViewer.prototype.initializeParameterMap = function() {
 
         self.parameterMap[parameter.variable] = parameter.default;
     }
-}
+};
 
 
 ElementViewer.prototype.renderViewer = function( viewerElementId ) {
@@ -380,7 +380,7 @@ ElementViewer.prototype.parseParameterValues = function() {
             self.parameterMap[parameters[i].variable] = value;
         }
     }
-}
+};
 
 ElementViewer.prototype.parseAttributeValues = function() {
     var self = this;
@@ -396,7 +396,7 @@ ElementViewer.prototype.parseAttributeValues = function() {
             console.log("attribute value" + value);
         }
     }
-}
+};
 
 ElementViewer.prototype.parseParameterValue = function( parameterVariable, parameterType ) {
     var editor = d3.select('#element-viewer-editor-' + self.uuid );
@@ -428,7 +428,7 @@ ElementViewer.prototype.parseParameterValue = function( parameterVariable, param
     }
 
     return ( value );
-}
+};
 
 
 ElementViewer.prototype.parseAttributeValue = function( attributeVariable ) {
@@ -444,7 +444,7 @@ ElementViewer.prototype.parseAttributeValue = function( attributeVariable ) {
     value = parseInt( $( editor ).val(), 10 );
 
     return ( value );
-}
+};
 
 
 ElementViewer.prototype.renderParameterEditor = function( element, parameter, value ) {

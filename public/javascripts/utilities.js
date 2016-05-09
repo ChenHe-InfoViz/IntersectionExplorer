@@ -35,7 +35,7 @@ Utilities.truncate = function(textElement, w) {
   }
 
   return textElement.text();
-}
+};
 
 // attach the .compare method to Array's prototype to call it on any array
 Array.prototype.compare = function (array) {
@@ -60,7 +60,7 @@ Array.prototype.compare = function (array) {
         }
     }
     return true;
-}
+};
 
 //
 Array.prototype.unique = function() {

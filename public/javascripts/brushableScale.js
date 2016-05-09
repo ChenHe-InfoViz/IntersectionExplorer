@@ -15,22 +15,22 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
         offsetY=0;
 
     var distanceBetweenAxis = 35; // distance between two scales
-    var distanceBetweenUpperAndLower = 25 // should be fix !!
+    var distanceBetweenUpperAndLower = 25; // should be fix !!
 //        height=20;
 
 
     var width = width;
 
-    var xScale = d3.scale.pow().exponent(2).domain([1,width]).range([0, width])
+    var xScale = d3.scale.pow().exponent(2).domain([1,width]).range([0, width]);
     var xOverViewAxisUpper = d3.svg.axis().scale(xScale);
     var xOverViewAxisLower = d3.svg.axis().scale(xScale).orient("top").tickFormat(function(d){return ""});
 
 
-    var xDetailScale = d3.scale.linear().domain([0,width]).range([0,width]).clamp(true)
+    var xDetailScale = d3.scale.linear().domain([0,width]).range([0,width]).clamp(true);
     var xDetailAxisUpper = d3.svg.axis().scale(xDetailScale).ticks(5);
     var xDetailAxisLower = d3.svg.axis().scale(xDetailScale).orient("top").tickFormat(function(d){return ""}).ticks(5);
 
-    var param = param
+    var param = param;
 
     var columnLabel ="ABC";
 
@@ -41,7 +41,7 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
         {name: "largest group",id:"G", value:200 },
         {name: "largest set",id:"S", value:300 },
         {name: "all items",id:"A", value:200 }
-    ]
+    ];
 
 
     var actionsTriggeredByLabelClick=params.actionsTrioggeredByLabelClick;
@@ -51,30 +51,30 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
         [0,-distanceBetweenAxis],
         [100,-distanceBetweenAxis],
         [width,0]
-    ]
+    ];
 
 
     // add axis
     svg.append("g").attr({
         "class":"x overviewAxisUpper axis",
         "transform":"translate("+offsetX+","+offsetY+")"
-    }).call(xOverViewAxisUpper)
+    }).call(xOverViewAxisUpper);
 
 
     svg.append("g").attr({
         "class":"x overviewAxisLower axis",
         "transform":"translate("+offsetX+","+(offsetY+distanceBetweenUpperAndLower)+")"
-    }).call(xOverViewAxisLower)
+    }).call(xOverViewAxisLower);
 
     svg.append("g").attr({
         "class":"x detailAxisUpper axis",
         "transform":"translate("+offsetX+","+(offsetY+distanceBetweenAxis+distanceBetweenUpperAndLower)+")"
-    }).call(xDetailAxisUpper)
+    }).call(xDetailAxisUpper);
 
     svg.append("g").attr({
         "class":"x detailAxisLower axis",
         "transform":"translate("+offsetX+","+(offsetY+distanceBetweenAxis+2*distanceBetweenUpperAndLower)+")"
-    }).call(xDetailAxisLower)
+    }).call(xDetailAxisLower);
 
 //    svg.append("path").attr({
 //        class:"connectionArea",
@@ -109,7 +109,7 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
         svg.selectAll(".detailAxisLower").call(xDetailAxisLower);
 
         connectionAreaData[1][0]= xScale(endRange);
-        updateConnectionArea()
+        updateConnectionArea();
         if (redrawFunction!=null) redrawFunction();
         ctx[scaleNameInCtx] = xDetailScale;
     };
@@ -120,15 +120,15 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
 //        overviewBrush.select(".e").attr({
 //            "transform":"translate("+xScale(size)+","+0+")"
 //        })
-        overviewBrush.call(overViewBrushDef)
+        overviewBrush.call(overViewBrushDef);
         brushed();
-    }
+    };
 
 
     function updateColumnLabel() {
         svg.select(".columnLabelGroup").select("rect").attr({
             width:width
-        })
+        });
 
         svg.select(".columnLabelGroup").select("text").attr({
             x:width/2
@@ -146,7 +146,7 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
         updateScales();
         updateSliderLabels();
         updateColumnLabel();
-    }
+    };
 
     function init(){
 
@@ -158,7 +158,7 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
         overViewBrushDef = d3.svg.brush()
             .x(xScale)
             .extent([0, ctx.scaleBarEndRange])
-            .on("brush", brushed)
+            .on("brush", brushed);
             //.on("brushstart", function(){
             //    svg.selectAll(".columnLabelGroup").transition().duration(100).style({
             //        opacity:0
@@ -186,14 +186,14 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
             class:"connectionArea"
         }).style({
                 opacity:.00001
-            })
+            });
 
         var labelHeight = ctx.cellDistance;
 
         var columnLabelGroup = svg.append("g").attr({
             class:"columnLabelGroup",
             "transform":"translate("+(0)+","+(distanceBetweenUpperAndLower+(distanceBetweenAxis-labelHeight)/2)+")" //Math.floor
-        })
+        });
 
         columnLabelGroup.append("rect").attr({
             class:"labelBackground",
@@ -201,7 +201,7 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
             y:0,
             width:width,
             height:labelHeight// TODO magic number
-        })
+        });
         //    .on({
         //        "click": function(){ actionsTriggeredByLabelClick.forEach(function(d){d();})},
         //    "mouseover": function(){ document.getElementById("tipbar").innerHTML = "Click to sort rows by their related number of papers (largest to smallest)."},
@@ -228,30 +228,30 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
             y:0,
             height:distanceBetweenUpperAndLower,
             width:overViewBrushDef.extent()[1]
-        })
+        });
 
         overviewBrush = sliders.append("g").attr({
             class:"slider"
-        }).call(overViewBrushDef)
+        }).call(overViewBrushDef);
 
         overviewBrush.selectAll(".w, .extent,  .background").remove();
 
         overviewBrush.selectAll("rect").attr({
             height:50,
             width:20
-        })
+        });
         overviewBrush.selectAll(".e")
             .append("rect")
             .attr({
                 "class":"handle"
-            })
+            });
         overviewBrush.selectAll("rect").attr({
             transform:"translate(0,"+(distanceBetweenUpperAndLower/2)+")rotate(45)",
             x:-5,
             y:-5,
             height:10,
             width:10
-        })
+        });
 
         sliders.append("g").attr({
             class:"labels"
@@ -283,9 +283,9 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
                 maxSpace = xScale(label)-label.toString(10).length*numberWidth;
                 drawLabels[label] = true;
             }
-        })
+        });
 
-        formatFunction = function(d,i){return (d in drawLabels)?d:"";}
+        formatFunction = function(d,i){return (d in drawLabels)?d:"";};
         // kill last regular tick if too close to maxValue
 //        if (xScale(tickValuesReverse[0])<  width-maxValue.toString(10).length* numberWidth){
 //            tickValues.slice()
@@ -309,18 +309,18 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
         xOverViewAxisUpper.scale(xScale).tickValues(tickValues).tickFormat(formatFunction);
         xOverViewAxisLower.scale(xScale).tickValues(tickValues);
 
-        xDetailScale.range([0,width])
+        xDetailScale.range([0,width]);
         xDetailAxisUpper.scale(xDetailScale);
         xDetailAxisLower.scale(xDetailScale);
         connectionAreaData[2] =  [width,0];
 
-        svg.select(".x.overviewAxisUpper.axis").call(xOverViewAxisUpper)
-        svg.select(".x.overviewAxisLower.axis").call(xOverViewAxisLower)
-        svg.select(".x.detailAxisUpper.axis").call(xDetailAxisUpper)
-        svg.select(".x.detailAxisLower.axis").call(xDetailAxisLower)
+        svg.select(".x.overviewAxisUpper.axis").call(xOverViewAxisUpper);
+        svg.select(".x.overviewAxisLower.axis").call(xOverViewAxisLower);
+        svg.select(".x.detailAxisUpper.axis").call(xDetailAxisUpper);
+        svg.select(".x.detailAxisLower.axis").call(xDetailAxisLower);
 
         // do NOT redraw !
-        overViewBrushDef.x(xScale)
+        overViewBrushDef.x(xScale);
         var saveRedraw = redrawFunction;
         redrawFunction = null;
         setBrush(brushedValue);
@@ -389,14 +389,14 @@ function BrushableScale(ctx, svg, width, updateFunctionNameInCtx, redrawFunction
 
 
     function updateConnectionArea(){
-        var cAreaNode = svg.selectAll(".connectionArea").data([connectionAreaData])
+        var cAreaNode = svg.selectAll(".connectionArea").data([connectionAreaData]);
         cAreaNode.exit().remove();
         cAreaNode.enter().append("path")
             .attr({
                 class:"connectionArea",
                  "transform":"translate("+offsetX+","+(offsetY+distanceBetweenUpperAndLower+distanceBetweenAxis)+")"
 
-            })
+            });
         cAreaNode.attr({
             "transform":"translate("+offsetX+","+(offsetY+distanceBetweenUpperAndLower+distanceBetweenAxis)+")",
             d:d3.svg.area()

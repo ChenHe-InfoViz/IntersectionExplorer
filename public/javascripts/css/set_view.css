@@ -3,7 +3,7 @@ li em{background:#ff6;font-style:normal}
 #hoverMenu li{background-color:#302f2f;color:#FFF;text-decoration:none;padding:10px;display:block}
 #hoverMenu li:hover{padding:10px;font-weight:700;color:#F00880}
 .text{display:block;width:90%}
-#errorMessage{display:block;height:30%;color:red}
+#errorMessage{display:block;height:25%;color:red}
 .axis path,.axis line{fill:none;stroke:gray;shape-rendering:crispEdges}
 .axis text{font-size:.8em}
 .setSize{fill:#636363;stroke:#fff;stroke-width:1px}

@@ -12,13 +12,13 @@ ROW_TYPE =
     AGGREGATE: 'AGGREGATE_TYPE',
     QUERY_GROUP: 'QUERY_GROUP_TYPE',
     SEPARATOR: 'SEPARATOR',
-    UNDEFINED: 'UNDEFINED'}
+    UNDEFINED: 'UNDEFINED'};
 
 GROUP_TYPE =
 {
     QUERY: "QUERY_GROUP",
     NONQUERY: "NONQUERY_GROUP"
-}
+};
 
 /** the user interface */
 var ui; // initialized on document ready event
@@ -191,7 +191,7 @@ function SubSet(setID, setName, combinedSets, itemList, expectedProb) {
 
 SubSet.prototype.toString = function () {
     return 'Subset + ' + this.id + ' Nr Combined Sets: ' + this.nrCombinedSets;
-}
+};
 
 // Not sure how to do this properly with parameters?
 SubSet.prototype = Set;
@@ -242,7 +242,7 @@ function Group(groupID, groupName, level) {
 //            this.disproportionality = this.disproportionalitySum/this.subSets.length;
 
 //        this.disproportionality += subSet.disproportionality;
-    }
+    };
 
     this.contains = function (element) {
         if (subSets.indexOf(element) >= 0) {
@@ -382,8 +382,8 @@ var getSubsetsForMaskList = function (subsets, maskList, callFunction) {
         //console.log(combinedSets);
         maskList.forEach(function (compare) {
             if (isAhit == false) {
-                var csLength = combinedSets.length
-                clauseMatches = (csLength == compare.length)
+                var csLength = combinedSets.length;
+                clauseMatches = (csLength == compare.length);
                 if (clauseMatches) {
                     for (var i = 0; i < csLength; i++) {
                         clauseMatches &= (
@@ -395,7 +395,7 @@ var getSubsetsForMaskList = function (subsets, maskList, callFunction) {
                     isAhit = true;
                 }
             }
-        })
+        });
 
         if (isAhit && callFunction != null) {
             callFunction(subset);
@@ -403,6 +403,6 @@ var getSubsetsForMaskList = function (subsets, maskList, callFunction) {
         } else if (isAhit) {
             res.push(subset);
         }
-    })
+    });
     return res;
-}
+};

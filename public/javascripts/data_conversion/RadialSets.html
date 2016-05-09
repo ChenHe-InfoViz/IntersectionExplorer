@@ -20,11 +20,11 @@
 
     var fileName = "../data/RadialSets/genres.txt";
     var setColumn = "Sets";
-    var outputFile = "genresUP.txt"
+    var outputFile = "genresUP.txt";
 
     d3.tsv(fileName,function(error,data){
 
-        var setNames = {}
+        var setNames = {};
 
 
       //  console.log(data);
@@ -39,7 +39,7 @@
                 }
             })
 
-        })
+        });
 
 
         function createSignature(upsetSet, setNames){
@@ -53,7 +53,7 @@
             if (d!=setColumn && d!="upsetSets") allKeys.push(d);
         });
 
-        var header = allKeys.concat(Object.keys(setNames))
+        var header = allKeys.concat(Object.keys(setNames));
         allLines.push(header.join("\t"));
 
         var dataItem = data.pop();
@@ -62,9 +62,9 @@
 
             var line = allKeys.map(function(key){
                 return dataItem[key];
-            })
+            });
             line = line.concat(createSignature(dataItem.upsetSets, setNames));
-            allLines.push(line.join("\t"))
+            allLines.push(line.join("\t"));
 
 
             dataItem = data.pop();
@@ -80,7 +80,7 @@
 
 
 
-    })
+    });
 
     var saveToFile = function(arrayOfLines, fileName) {
         /* adds linebreaks at the end*/

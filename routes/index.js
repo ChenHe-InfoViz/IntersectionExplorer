@@ -104,7 +104,7 @@ router.post("/iestudy/proceedings", function(req, res) {
                 console.log(paperXml);
                 // Data reception is done, do whatever with it!
                 paperXml = paperXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                res.header('Content-Type','text/xml').send(paperXml)
+                res.header('Content-Type','text/xml').send(paperXml);
                 //parseString(resXml, function (err, result) {
                 //    res.json(result);
                 //});
@@ -141,7 +141,7 @@ router.post("/iestudy/bookmarks", function(req, res) {
             response.on('end', function() {
                 // Data reception is done, do whatever with it!
                 bookmarkXml = bookmarkXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                res.header('Content-Type','text/xml').send(bookmarkXml)
+                res.header('Content-Type','text/xml').send(bookmarkXml);
                 //parseString(resXml, function (err, result) {
                 //    res.json(result);
                 //});
@@ -178,7 +178,7 @@ router.post("/iestudy/tags", function(req, res) {
             response.on('end', function() {
                 // Data reception is done, do whatever with it!
                 tagXml = tagXml.replace(/(\r\n|\n|\r|\t)/gm, '');
-                res.header('Content-Type','text/xml').send(tagXml)
+                res.header('Content-Type','text/xml').send(tagXml);
                 //parseString(resXml, function (err, result) {
                 //    res.json(result);
                 //});
@@ -263,7 +263,7 @@ router.post("/iestudy/external", function(req, res) {
         var content = req.body;
         var options = {
             host: "halley.exp.sis.pitt.edu",
-            port: 8080,
+            port: 80,
             path: "/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=139&sourcetype=3&userID=" + content.userid,
             method: 'POST',
         };
@@ -324,6 +324,28 @@ router.post("/iestudy/top", function(req, res) {
         request.end();
     }
 );
+
+router.post("/iestudy/bookmark", function(req, res) {
+        var content = req.body;
+        console.log(content.userId + " " + content.id);
+        var options = {
+            host: "halley.exp.sis.pitt.edu",
+            port: 80,
+            path: "/cn3/include/put2.php?method=schedulePresentation&userID=" + content.userId + "&contentID=" + content.id,
+            method: 'POST',
+        };
+        var request = http.request(options, function(response){
+            // Continuously update stream with data
+            res.json(204);
+        });
+        request.on('error', function(e) {
+            res.json(500);
+            console.log('problem with request: ' + e.message);
+        });
+        request.end();
+    }
+);
+
 
 router.post("/iestudy/contentbased", function(req, res) {
         var content = req.body;

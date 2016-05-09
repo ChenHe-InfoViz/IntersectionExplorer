@@ -58,7 +58,7 @@ Selection.createSubsetDefinition = function (subsets) {
                 subsetDefinition.push(oneDefinition);
                 //console.log("ooooooooooooo");
                 //console.log(oneDefinition);
-            })
+            });
             //subsets[s].subSets.forEach(function(set, i){
             //    var oneDefinition = {};
             //    if(set.items.length > 0) {
@@ -145,7 +145,7 @@ Selection.prototype.applyFilters = function () {
     }
 
     $(EventManager).trigger("item-selection-updated", { selection: self });
-}
+};
 
 Selection.prototype.mapToSubsets = function (subsetList) {
     for (var i = 0; i < subsetList.length; ++i) {
@@ -175,7 +175,7 @@ Selection.prototype.mapToSubsets = function (subsetList) {
 
         subset.selections[this.id] = mappedItems;
     }
-}
+};
 
 Selection.prototype.unmapFromSubsets = function (subsetList) {
     for (var i = 0; i < subsetList.length; ++i) {
@@ -183,13 +183,13 @@ Selection.prototype.unmapFromSubsets = function (subsetList) {
 
         delete subset.selections[this.id];
     }
-}
+};
 
 Selection.prototype.getFilter = function (uuid) {
     var self = this;
 
     return self.filterCollection.get(uuid);
-}
+};
 
 // should be a singleton
 SelectionList = function (palette) {
@@ -206,7 +206,7 @@ SelectionList = function (palette) {
 SelectionList.prototype.getSelections = function () {
     var self = this;
     return selections.list;
-}
+};
 
 SelectionList.prototype.addSelection = function (selection) {
     var self = this;

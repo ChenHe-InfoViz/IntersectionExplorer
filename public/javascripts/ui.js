@@ -14,35 +14,42 @@ Ui = function(userid, username) {
 
 
 
-    //this.dialog = $( "#dialog" ).dialog({
-    //    //autoOpen: false,
-    //    height: 250,
-    //    width: 300,
-    //    modal: true,
-    //    dialogClass: 'ui-dialog',
-    //    buttons: {
-    //        "Sign in": self.signin,
-    //        Cancel: function() {
-    //            $(this).dialog( "close" );
-    //        }
-    //    },
-    //    open: function(){
-    //        $("#dialog").keypress(function(e) {
-    //            if (e.keyCode == 13) {
-    //                $(this).parent().find("button:eq(1)").trigger("click");
-    //            }
-    //        });
-    //    },
-    //    close: function() {
-    //        $("#errorMessage").text("");
-    //        $("#login-form")[0].reset();
-    //        //form[ 0 ].reset();
-    //        //allFields.removeClass( "ui-state-error" );
-    //    }
-    //});
+    this.dialog = $( "#dialog" ).dialog({
+        //autoOpen: false,
+        height: 250,
+        width: 300,
+        modal: true,
+        dialogClass: 'ui-dialog',
+        buttons: {
+            "Sign in": self.signin,
+            Cancel: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        open: function(){
+            $("#dialog").keypress(function(e) {
+                if (e.keyCode == 13) {
+                    $(this).parent().find("button:eq(1)").trigger("click");
+                }
+            });
+        },
+        close: function() {
+            $("#errorMessage").text("");
+            $("#login-form")[0].reset();
+            //form[ 0 ].reset();
+            //allFields.removeClass( "ui-state-error" );
+        }
+    });
 
-    globalname = username;
-    globalUserId = userid;
+    globalname = "P Brusilovsky";
+    globalUserId = 16;
+
+    //var date = new Date();
+    //userBehavior.push({
+    //    userID: globalUserId,
+    //    name: globalname,
+    //    time: (date.getDate() < 10 ? '0' : '') + date.getDate() + " @ " + (date.getHours() < 10 ? '0' : '') + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds()
+    //});
 
     self.searchResultArray = {};
     self.searchResultIndex = 0;
@@ -58,7 +65,7 @@ Ui = function(userid, username) {
         //console.log("----------");
         $(self.searchResultArray[self.searchResultIndex]).find("em").each(function(){
             $(this).css("background", "#ff6");
-        })
+        });
         self.searchResultIndex--;
         if(self.searchResultIndex < 0)
             self.searchResultIndex = self.searchResultArray.length - 1;
@@ -81,7 +88,7 @@ Ui = function(userid, username) {
         //console.log("++++++++++++++");
         $(self.searchResultArray[self.searchResultIndex]).find("em").each(function () {
             $(this).css("background", "#ff6");
-        })
+        });
         self.searchResultIndex++;
         if (self.searchResultIndex > self.searchResultArray.length - 1)
             self.searchResultIndex = 0;
@@ -100,7 +107,7 @@ Ui = function(userid, username) {
         $(self.searchResultArray[self.searchResultIndex]).find("em").each(function(){
             $(this).css("background", "#fb954b");
         })
-    })
+    });
 
     UpSet();
 };
@@ -164,7 +171,7 @@ Ui.prototype.searchSets = function(text){
     $(self.searchResultArray[0]).find("em").each(function(){
         $(this).css("background", "#fb954b");
     })
-}
+};
 
 /**
  * update container sizes
@@ -192,9 +199,9 @@ Ui.prototype.resize = function( event ) {
 
         self.lastWindowHeight = $(window).height();
 
-        return;
+
     }
-}
+};
 
 
 Ui.prototype.updateFixedHeightContainers = function() {
@@ -210,7 +217,7 @@ Ui.prototype.updateFixedHeightContainers = function() {
         var newHeight = Math.min( Math.max( targetHeight, minHeight ), maxHeight );
         $(this).css('height', newHeight + 'px');
     });
-}
+};
 
 
 Ui.prototype.initialize = function() {
@@ -223,7 +230,7 @@ Ui.prototype.initialize = function() {
     self.hideMenu();
     self.updateFixedHeightContainers();
 
-}
+};
 
 Ui.prototype.createHeader = function() {
     var self = this;
@@ -232,11 +239,11 @@ Ui.prototype.createHeader = function() {
         self.loginUI();
         //self.toggleMenu();
     });
-}
+};
 
 Ui.prototype.loginUI = function() {
     $("#dialog").dialog('open');
-}
+};
 
 Ui.prototype.signMark = 1;
 Ui.prototype.signin = function() {
@@ -246,99 +253,107 @@ Ui.prototype.signin = function() {
 
     if(Ui.prototype.signMark) {
         Ui.prototype.signMark = 0;
-        $.ajax({
-            type: "POST",
-            url: "userinfo",
-            contentType: 'application/json',
-            data: JSON.stringify({email: email, password: password}),
-            dataType: 'json',
-            timeout: 6000,
-            success: function (res) {
-                try {
-                    var content = res;//JSON.parse(res);
-                    if (content.status == 0) {
-                        console.log("status error");
-                        $("#errorMessage").text(content.message);
-                    }
-                    else {
-                        globalUserId = content.userid;
-                        globalname = "";
-                        var names = content.name.split(' ');
-                        if (names.length > 1) {
-                            globalname += names[0].substring(0, 1) + " ";
-                        }
-                        globalname += names[names.length - 1];
-                        globalEmail = email;
-                        //console.log(globalUserId);
-                        $("#dialog").dialog('close');
-                        var loginHead = document.getElementById("login-header");
-                        $("#login-header").text(email);
-                        $("#login-header").off("click");
-
-                        var ulElement = document.createElement("ul"), liElement = document.createElement("li");
-                        liElement.innerHTML = "Sign out";
-                        ulElement.id = "hoverMenu";
-                        ulElement.appendChild(liElement);
-                        loginHead.appendChild(ulElement);
-
-                        $("#login-header").hover(function () {
-                                $('#hoverMenu').slideDown('medium');
-                            },
-                            function () {
-                                $('#hoverMenu').slideUp('medium');
-                            }
-                        );
-                        liElement.addEventListener("click", function () {
-                            //console.log("clicked");
-                            $("#login-header").text("Sign in");
-                            $("#login-header").on("click", function (e) {
-                                $("#dialog").dialog('open');
-                            });
-                        });
-                        //$("#login-header").on("click", function(event) {
-                        //    $("#login-header").text("Sign in");
-                        //    $("#login-header").on("click", function(e){
-                        //        self.loginUI();
-                        //    })
-                        //});
-                        var date = new Date();
-                        userBehavior.push({
-                            userID: globalUserId,
-                            email: globalEmail,
-                            name: globalname,
-                            time: (date.getDate() < 10 ? '0' : '') + date.getDate() + " @ " + (date.getHours() < 10 ? '0' : '') + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds()
-                        });
-                        UpSet();
-                    }
-                }
-                catch (e) {
-                    Ui.prototype.signMark = 1;
-                    console.log("login error");
-                    $("#errorMessage").text("An error has occurred. Please try again in a sec.");
-                }
-            },
-            error: function (e) {
-                Ui.prototype.signMark = 1;
-                console.log("get user info failed.");
-                $("#errorMessage").text("Internal server error...Please try again in a sec.");
-            }
-        });
+        Ui.prototype.loginRequest(email, password);
     }
-
     //$("#dialog").dialog('close');
-}
+};
+
+Ui.prototype.loginRequest = function(email, password){
+    var self = this;
+    $.ajax({
+        type: "POST",
+        url: "userinfo",
+        contentType: 'application/json',
+        data: JSON.stringify({email: email, password: password}),
+        dataType: 'json',
+        timeout: 3000,
+        success: function (res) {
+            try {
+                var content = res;//JSON.parse(res);
+                if (content.status == 0) {
+                    console.log("status error");
+                    $("#errorMessage").text(content.message);
+                }
+                else {
+                    console.log(content.userid);
+                    globalUserId = content.userid;
+                    globalname = "";
+                    var names = content.name.split(' ');
+                    if (names.length > 1) {
+                        globalname += names[0].substring(0, 1) + " ";
+                    }
+                    globalname += names[names.length - 1];
+                    globalEmail = email;
+                    $("#dialog").dialog('close');
+                    var loginHead = document.getElementById("login-header");
+                    $("#login-header").text("Login as " + email);
+                    $("#login-header").off("click");
+
+                    var imgElement = document.createElement("img");
+                    imgElement.src = "./javascripts/images/31.gif";
+                    document.getElementById("fader").appendChild(imgElement);
+                    //var ulElement = document.createElement("ul"), liElement = document.createElement("li");
+                    //liElement.innerHTML = "Log in as " + email;
+                    //ulElement.id = "hoverMenu";
+                    //ulElement.appendChild(liElement);
+                    //loginHead.appendChild(ulElement);
+                    //
+                    //$("#login-header").hover(function () {
+                    //        $('#hoverMenu').slideDown('medium');
+                    //    },
+                    //    function () {
+                    //        $('#hoverMenu').slideUp('medium');
+                    //    }
+                    //);
+                    //liElement.addEventListener("click", function () {
+                    //    //console.log("clicked");
+                    //    $("#login-header").text("Sign in");
+                    //    $("#login-header").on("click", function (e) {
+                    //        $("#dialog").dialog('open');
+                    //    });
+                    //});
+                    //$("#login-header").on("click", function(event) {
+                    //    $("#login-header").text("Sign in");
+                    //    $("#login-header").on("click", function(e){
+                    //        self.loginUI();
+                    //    })
+                    //});
+                    var date = new Date();
+                    userBehavior.push({
+                        userID: globalUserId,
+                        email: globalEmail,
+                        name: globalname,
+                        time: (date.getDate() < 10 ? '0' : '') + date.getDate() + " @ " + (date.getHours() < 10 ? '0' : '') + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds()
+                    });
+                    UpSet();
+                }
+            }
+            catch (e) {
+                Ui.prototype.signMark = 1;
+                console.log("login error" + e);
+                //$("#errorMessage").text("An error has occurred. Please try again in a sec.");
+            }
+        },
+        error: function (e) {
+            Ui.prototype.signMark = 1;
+            Ui.prototype.loginRequest(email, password);
+            console.log("get user info failed.");
+            $("#errorMessage").text("Wait a sec. It is in processing....");
+        }
+    });
+};
 
 Ui.prototype.showMenu = function() {
     var self = this;
 
     $(".ui-menu").show();
-}
+};
 
 Ui.prototype.hideMenu = function() {
     var self = this;
 
     $(".ui-menu").hide();
-}
+};
 
 Ui.prototype.toggleMenu = function() {
     var self = this;
@@ -346,10 +361,10 @@ Ui.prototype.toggleMenu = function() {
     $(".ui-menu").slideToggle( { step: self.updateFixedHeightContainers } );
 
     //$( "#show-menu-button").toggleClass( "fa-spin");
-}
+};
 
 Ui.prototype.initWidthHandler = function(){
-    $("#moveLeftHandle").on("drag")
+    $("#moveLeftHandle").on("drag");
 
     $(function() {
         var isDragging = false;
@@ -360,7 +375,7 @@ Ui.prototype.initWidthHandler = function(){
 
         $("#moveLeftHandle")
             .mousedown(function(event) {
-                event.stopPropagation()
+                event.stopPropagation();
                 //  console.log("MD");
                 if ( !isDragging ) {
                     startX = event.clientX; //#set-vis-container
@@ -388,7 +403,7 @@ Ui.prototype.initWidthHandler = function(){
             if ( isDragging ) {
                 endX = event.clientX;
 
-                event.stopPropagation()
+                event.stopPropagation();
 
                 $(".ui-layout-west").width( leftWidth + (endX - startX) );
                 $("#vis").width( leftWidth + (endX - startX) );
@@ -403,10 +418,10 @@ Ui.prototype.initWidthHandler = function(){
 
     });
 
-}
+};
 
 Ui.prototype.initWidthHandler = function(){
-    $("#moveHandle").on("drag")
+    $("#moveHandle").on("drag");
 
     $(function() {
         var isDragging = false;
@@ -418,7 +433,7 @@ Ui.prototype.initWidthHandler = function(){
 
         $("#moveHandle")
             .mousedown(function(event) {
-                event.stopPropagation()
+                event.stopPropagation();
                 console.log("MD");
                 if ( !isDragging ) {
                     startX = event.clientX; //#set-vis-container
@@ -447,7 +462,7 @@ Ui.prototype.initWidthHandler = function(){
             if ( isDragging ) {
                 endX = event.clientX;
 
-                event.stopPropagation()
+                event.stopPropagation();
 
                 $("#set-vis-container").width( leftWidth + (endX - startX) );
                 $("#element-view-part").width( rightWidth + (startX - endX) );
@@ -457,15 +472,10 @@ Ui.prototype.initWidthHandler = function(){
 //                $("#right").width( rightLeft - (endX - startX) );
 
                 $(EventManager).trigger( "vis-svg-resize", { newWidth:+(leftWidth + (endX - startX)) });
-
             }
         });
-
     });
 
 
 
-
-
-
-}
+};

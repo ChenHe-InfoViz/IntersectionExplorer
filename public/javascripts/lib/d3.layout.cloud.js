@@ -65,7 +65,7 @@
           event.end(tags, bounds);
         }
       }
-    }
+    };
 
     cloud.stop = function() {
       if (timer) {

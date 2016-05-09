@@ -22,28 +22,28 @@ StatisticGraphs.prototype.updateStatistics= function(subsetData, subsetIDselecto
     var min = undefined;
     var max = undefined;
 
-    var collector= {}
+    var collector= {};
 
     subsetData.forEach(function(subset){
 
-        var attributeColumn = {}
+        var attributeColumn = {};
         itemData.forEach(function(d){
             if (d[attributeIDSelector]== attributeID) attributeColumn =d[attributeValueSelector];
-        })
+        });
 
 //        console.log("attr",attributeColumn);
 
-        var itemIDSelectors = itemIDselector.split(".")
+        var itemIDSelectors = itemIDselector.split(".");
 
         var actualSubset = subset;
         itemIDSelectors.forEach((function(selector){
             actualSubset = actualSubset[selector];
-        }))
+        }));
 //        console.log(actualSubset);
 
         var itemList = actualSubset.map(function(itemID){
             return +attributeColumn[itemID]
-        })
+        });
 
 //        console.log(itemList);
 
@@ -54,12 +54,12 @@ StatisticGraphs.prototype.updateStatistics= function(subsetData, subsetIDselecto
             lowerQuartile:0,
             upperQuartile:0
 
-        }
+        };
         itemList.sort(d3.ascending);
 
 
         if (itemList.length!=0){
-            var extent = d3.extent(itemList)
+            var extent = d3.extent(itemList);
             summaryStatistics.min = extent[0];
             summaryStatistics.max = extent[1];
 
@@ -86,29 +86,29 @@ StatisticGraphs.prototype.updateStatistics= function(subsetData, subsetIDselecto
 
         collector[subset[subsetIDselector]] = summaryStatistics;
 
-    })
+    });
 
     this.statistics=collector;
     this.scale.domain([min,max]);
     this.axis.scale(this.scale)
 
-}
+};
 
 StatisticGraphs.prototype.renderAxis = function(g,x,y,w){
 
     this.scale.rangeRound([0,w]);
     this.axis.scale(this.scale).ticks(Math.ceil(w/50)); //Math.ceil(w/50)
 
-    var detailStatAxisVis = g.selectAll(".axis").data(["summary"])
+    var detailStatAxisVis = g.selectAll(".axis").data(["summary"]);
     detailStatAxisVis.enter().append("g").attr({
         class:"axis",
         "transform":"translate("+x+","+y+")"
-    }).call(this.axis)
+    }).call(this.axis);
 
     detailStatAxisVis.exit().remove();
     detailStatAxisVis.transition().call(this.axis);
 
-}
+};
 
 
 StatisticGraphs.prototype.renderBoxPlot = function(id, g, x,y,w,h,classID){
@@ -117,32 +117,32 @@ StatisticGraphs.prototype.renderBoxPlot = function(id, g, x,y,w,h,classID){
 
 
     if (actualStat!=null){
-        var dS = g.selectAll("."+classID).data([actualStat])
+        var dS = g.selectAll("."+classID).data([actualStat]);
         dS.exit().remove();
 
 
         var dSEnter = dS.enter().append("g").attr({
             class:""+classID
-        })
+        });
         dSEnter.append("line").attr({
             class:"boxPlot centralLine"
-        })
+        });
         dSEnter.append("line").attr({
             class:"boxPlot minLine"
-        })
+        });
         dSEnter.append("line").attr({
             class:"boxPlot maxLine"
-        })
+        });
         dSEnter.append("rect").attr({
             class:"boxPlot quartile"
-        }).append("title").text(function(d){return "|"+ d.min+" --["+ d.lowerQuartile+" |"+ d.median+"| "+ d.upperQuartile+"]-- "+ d.max+"|"})
+        }).append("title").text(function(d){return "|"+ d.min+" --["+ d.lowerQuartile+" |"+ d.median+"| "+ d.upperQuartile+"]-- "+ d.max+"|"});
 
         dSEnter.append("line").attr({
             class:"boxPlot medianLine"
-        })
+        });
 
 
-        var localScale = this.scale
+        var localScale = this.scale;
 
         dS.select("rect").transition().attr({
             x:function(d){
@@ -155,28 +155,28 @@ StatisticGraphs.prototype.renderBoxPlot = function(id, g, x,y,w,h,classID){
             height:(h-(2*diffY))
         }).attr({
                 opacity:function(d){return (d.numberElements>4)?1:0.0001}
-            })
+            });
 
         dS.select(".boxPlot.centralLine").transition().attr({
             x1:function(d){return x+localScale(d.min)},
             x2:function(d){return x+localScale(d.max)},
             y1:(y+h/2),
             y2:(y+h/2)
-        })
+        });
 
         dS.select(".boxPlot.minLine").transition().attr({
             x1:function(d){return x+localScale(d.min)},
             x2:function(d){return x+localScale(d.min)},
             y1:(y+diffY),
             y2:(y+h-diffY)
-        })
+        });
 
         dS.select(".boxPlot.maxLine").transition().attr({
             x1:function(d){return x+localScale(d.max)},
             x2:function(d){return x+localScale(d.max)},
             y1:(y+diffY),
             y2:(y+h-diffY)
-        })
+        });
 
         dS.select(".boxPlot.medianLine").transition().attr({
             x1:function(d){return x+localScale(d.median)},
@@ -190,7 +190,7 @@ StatisticGraphs.prototype.renderBoxPlot = function(id, g, x,y,w,h,classID){
 
 
     }else{
-        var nullVis =  g.selectAll(".detailStatistics").data("null")
+        var nullVis =  g.selectAll(".detailStatistics").data("null");
         nullVis.exit().remove();
         nullVis.enter().append("g").attr({
             class:"detailStatistics"
@@ -199,7 +199,7 @@ StatisticGraphs.prototype.renderBoxPlot = function(id, g, x,y,w,h,classID){
                 x2:x+w-1,
                 y1:y+h/2,
                 y2:y+h/2
-            })
+            });
 
         nullVis.select("line").attr({
             x1:x+1,
@@ -215,4 +215,4 @@ StatisticGraphs.prototype.renderBoxPlot = function(id, g, x,y,w,h,classID){
 
 
 
-}
+};

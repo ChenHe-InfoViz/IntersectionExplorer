@@ -453,7 +453,7 @@ Filter.prototype.parseParameterValues = function( selection ) {
             filterInstanceParameters[filterParameters[i].variable] = value;
         }
     }
-}
+};
 
 Filter.prototype.parseParameterValue = function( parameterVariable, parameterType ) {
     var self = this;
@@ -487,7 +487,7 @@ Filter.prototype.parseParameterValue = function( parameterVariable, parameterTyp
     }
 
     return ( value );
-}
+};
 
 Filter.prototype.renderParameterEditor = function( element, parameterName, parameterType, parameterValue, parameterVariable ) {
     var self = this;
@@ -550,5 +550,5 @@ Filter.prototype.subsetStateToClass = function( state ) {
     }
 
     return ( s );
-}
+};
 
