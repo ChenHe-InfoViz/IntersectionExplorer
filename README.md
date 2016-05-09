@@ -6,8 +6,8 @@ This web application is an interactive visualization that allows you to explore 
 
 ## Tutorial
 
-[https://www.youtube.com/watch?v=1Jq3oUZv-9E]
+https://www.youtube.com/watch?v=1Jq3oUZv-9E
 
 ## Demo
 
-[https://daddi.cs.kuleuven.be/iestudy/]
+https://daddi.cs.kuleuven.be/iestudy/
