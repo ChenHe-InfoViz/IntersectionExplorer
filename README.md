@@ -1,4 +1,4 @@
-# IntersectionExplorer for IUI proceedings
+# IntersectionExplorer for IUI 2016 proceedings
 
 ## About
 
