@@ -41,8 +41,8 @@ Ui = function(userid, username) {
         }
     });
 
-    globalname = "P Brusilovsky";
-    globalUserId = 16;
+    //globalname = "P Brusilovsky";
+    //globalUserId = 16;
 
     //var date = new Date();
     //userBehavior.push({
@@ -109,7 +109,7 @@ Ui = function(userid, username) {
         })
     });
 
-    UpSet();
+    //UpSet();
 };
 
 

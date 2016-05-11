@@ -210,7 +210,7 @@ function plotSelectedItems( elementId, selection ) {
                                 //        title: attributes[2].values[selection.items[i]]
                                 //    });
                                 //$dialog.dialog('open');
-                                window.open("http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=139&presentationID=" + attributes[1].values[selection.items[i]], '_blank');
+                                window.open("http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=141&presentationID=" + attributes[1].values[selection.items[i]], '_blank');
                                 var date = new Date();
                               userBehavior.push({type: 5, item: attributes[0].values[selection.items[i]],time: (date.getDate()<10?'0':'') + date.getDate()  + " @ " + (date.getHours()<10?'0':'') + date.getHours()  + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes()  + ":" + (date.getSeconds()<10?'0':'') + date.getSeconds()});
                                 $(EventManager).trigger("user-behavior-added");

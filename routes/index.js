@@ -90,7 +90,7 @@ router.post("/iestudy/proceedings", function(req, res) {
             //method: 'GET',
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3/xml/proceedings_139.xml",
+            path: "/cn3/xml/content_WebScience2016.xml",
             method: 'POST',
         };
         var request = http.request(options, function(response){
@@ -129,7 +129,7 @@ router.post("/iestudy/bookmarks", function(req, res) {
             //method: 'GET',
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3/xml/scheduling.xml.php?conferenceID=139",
+            path: "/cn3/xml/scheduling.xml.php?conferenceID=141",
             method: 'POST',
         };
         var request = http.request(options, function(response){
@@ -166,7 +166,7 @@ router.post("/iestudy/tags", function(req, res) {
             //method: 'GET',
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3/xml/tagging.xml.php?conferenceID=139",
+            path: "/cn3/xml/tagging.xml.php?conferenceID=141",
             method: 'POST',
         };
         var request = http.request(options, function(response){
@@ -198,7 +198,7 @@ router.post("/iestudy/tagbased", function(req, res) {
         var options = {
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3mobile/bM25SysRec.jsp?conferenceID=139&userID=" + content.userid,
+            path: "/cn3mobile/bM25SysRec.jsp?conferenceID=141&userID=" + content.userid,
             method: 'POST',
         };
         var request = http.request(options, function(response){
@@ -231,7 +231,7 @@ router.post("/iestudy/bibli", function(req, res) {
         var options = {
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=139&sourcetype=2&userID=" + content.userid,
+            path: "/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=141&sourcetype=2&userID=" + content.userid,
             method: 'POST',
         };
         var request = http.request(options, function(response){
@@ -264,7 +264,7 @@ router.post("/iestudy/external", function(req, res) {
         var options = {
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=139&sourcetype=3&userID=" + content.userid,
+            path: "/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=141&sourcetype=3&userID=" + content.userid,
             method: 'POST',
         };
         var request = http.request(options, function(response){
@@ -297,7 +297,7 @@ router.post("/iestudy/top", function(req, res) {
         var options = {
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3mobile/topBookmarkings.jsp?conferenceID=139",
+            path: "/cn3mobile/topBookmarkings.jsp?conferenceID=141",
             method: 'POST',
         };
         var request = http.request(options, function(response){
@@ -353,7 +353,7 @@ router.post("/iestudy/contentbased", function(req, res) {
         var options = {
             host: "halley.exp.sis.pitt.edu",
             port: 80,
-            path: "/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=139&userID=" + content.userid,
+            path: "/cn3mobile/contentBasedSysRecKatrien.jsp?conferenceID=141&userID=" + content.userid,
             method: 'POST',
         };
         var request = http.request(options, function(response){
