@@ -1,8 +1,8 @@
-# IntersectionExplorer for IUI 2016 proceedings
+# IntersectionExplorer for the IUI 2016 proceedings
 
 ## About
 
-This web application is an interactive visualization that allows you to explore papers of the IUI 2016 conference. The visualization shows you papers that you have bookmarked in Conference Navigator and users who are similar to you because you bookmarked same papers. In addition, this visualization enables you to explore recommendations that are generated based on your interests.
+This web application is an interactive visualization that allows users to explore papers of the IUI 2016 conference. The visualization shows the papers that one has bookmarked in Conference Navigator (http://halley.exp.sis.pitt.edu/cn3/portalindex.php) and similar users based on common bookmarked papers. In addition, this visualization enables one to explore recommendations that are generated based on one's interests.
 
 ## Tutorial
 
